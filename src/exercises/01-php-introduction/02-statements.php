@@ -27,6 +27,20 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $age = rand(0, 65);
+
+        if ($age <= 12) {
+            echo "You are in the Child age group";
+        }
+        else if ($age <= 19) {
+            echo "You are in the Teenager age group";
+        }
+        else if ($age <= 64) {
+            echo "You are in the Adult age group";
+        } 
+        else if ($age >= 65) {
+            echo "You are in the Senior age group";
+        }
         ?>
     </div>
 
@@ -43,6 +57,36 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $day = rand(1, 7);
+
+        echo "Today is a ";
+        switch (true) {
+            case($day <= 1);
+                echo "weekday, Monday";
+                break;
+            case($day <= 2);
+                echo "weekday, Tuesday";
+                break;
+            case($day <= 3);
+                echo "weekday, Wednesday";
+                break;
+            case($day <= 4);
+                echo "weekday, Thursday";
+                break;
+            case($day <= 5);
+                echo "weekday, Friday";
+                break;
+            case($day <= 6);
+                echo "weekend, Saturday";
+                break;
+            case($day >= 7);
+                echo "weekend, Sunday";
+                break;
+            default:
+                echo "Error Input";
+                break;
+        }
+
         ?>
     </div>
 
@@ -58,6 +102,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $num = rand(1, 10);
+        echo "The multiples of: $num" . "<br>";
+        for ($i = 1; $i < 11; $i++) {
+            $sum = $num * $i;
+            echo "$num x $i = $sum" . "<br>";
+        }
         ?>
     </div>
 
@@ -73,6 +123,16 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $num = 10;
+        echo "In..." . "<br>";
+        for ($i = 0; $i < 10; $i++) {
+            $countdown = $num - $i;
+            echo "$countdown" . "<br>";
+            if ($countdown <=1) {
+                echo "Blast Off!!" . "<br>";
+            }
+        }
+
         ?>
     </div>
 
