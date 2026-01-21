@@ -27,6 +27,18 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $server = [
+            "PHP_SELF" => "/examples/01-php-introduction/04-super-globals.php",
+            "REQUEST_METHOD" => "GET",
+            "HTTP_HOST" => "localhost:8080",
+            "HTTP_USER_AGENT" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+        ];
+
+        foreach ($server as $item => $content) {    
+        echo "<ul>";
+        echo "<li><strong>$item:</strong> $content</li>";
+        echo "</ul>";   
+        }
         ?>
     </div>
 
@@ -43,6 +55,13 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        if (isset($_GET['name'])) {
+        echo "Hello " . $_GET['name'] . "!";
+        } 
+        else {
+        echo "Hello Guest!";
+        };
         ?>
     </div>
 

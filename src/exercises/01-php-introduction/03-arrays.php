@@ -122,7 +122,7 @@
         ];
 
         foreach ($menu as $section => $items) {
-            echo "<p>" . ucfirst($section);
+            echo "<p>" . ucfirst($section) . "</p>";
             echo "<ul>";
             foreach ($items as $meal => $price) {
                 echo "<li>$meal\t($price)</li>";
