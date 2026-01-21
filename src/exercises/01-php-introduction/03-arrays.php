@@ -27,7 +27,13 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        $movies = ['Tangled', 'Beauty and the Beast', 'Zootopia 2', 'Little Women', 'Elementals'];
+        $movies = [
+            'Tangled', 
+            'Beauty and the Beast', 
+            'Zootopia 2', 
+            'Little Women', 
+            'Elementals'
+        ];
         echo "<ul>";
         for ($i = 0; $i < count($movies); $i++) {
             $movieNum = $i + 1;

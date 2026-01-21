@@ -79,6 +79,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        if (isset($_GET['product'])) {
+        echo "You ordered ". $_GET['quantity'] ." ". $_GET['product'] . "(s).";
+        }
+        else {
+        echo "Error. Please try again.";
+        };
         ?>
     </div>
 
