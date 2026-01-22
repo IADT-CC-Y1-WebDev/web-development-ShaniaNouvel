@@ -25,6 +25,14 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function celsiusToFahrenheit($celsius) {
+            $fahrenheit = ($celsius * 9/5) + 32;
+            echo "<p>The $celsius degree celsius is equivilent to $fahrenheit fahrenheit</p>";
+        }
+        celsiusToFahrenheit(5);
+        celsiusToFahrenheit(15);
+        celsiusToFahrenheit(25);
+
         ?>
     </div>
 
@@ -41,6 +49,20 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function calculateRectangleArea($width, $height = null) {
+            if ($height === null) {
+                $area = $width * $width;
+                echo "<p>The area is $area.</p>";
+            }
+            else {
+                $area = $width * $height;    
+                echo "<p>The area is $area.</p>";
+            }
+        }
+        calculateRectangleArea(2, 3);
+        calculateRectangleArea(10, 7);
+        calculateRectangleArea(2);
+
         ?>
     </div>
 
@@ -57,6 +79,19 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function checkEvenOdd($num) {
+            $value = $num % 2;
+            if ($value === 0) {
+                echo "<p>Even</p>";
+            } 
+            else {
+                echo "<p>Odd</p>";
+            } 
+        }
+
+         checkEvenOdd(2);
+         checkEvenOdd(5);
+
         ?>
     </div>
 
@@ -73,6 +108,37 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        function getArrayStats($num1, $num2, $num3) {
+            if ($num1 < $num2) {
+                if($num1 < $num3) {
+                    echo "<p>The minimum value is $num1</p>";
+                }
+            } 
+            else if ($num2 < $num3) {
+                    echo "<p>the minimum is $num3</p>"; 
+            }
+            else {
+                echo "<p>the minimum value is $num</p>";
+            }
+
+            if ($num1 > $num2) {
+                if($num1 > $num3) {
+                    echo "<p>The maximum value is $num1</p>";
+                }
+            } 
+            else if ($num2 > $num3) {
+                    echo "<p>the maximum is $num3</p>"; 
+            }
+            else {
+                echo "<p>The maximum value is $num3</p>";
+            }
+
+            $average = ($num1 + $num2 + $num3) / 2;
+            echo "The average is $average";
+        } 
+
+         getArrayStats(1, 2, 3);
+
         ?>
     </div>
 
