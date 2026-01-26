@@ -1,5 +1,5 @@
 <?php
-    class StudentV3 {
+    class StudentFile {
         private $name;
         Private $number;
 

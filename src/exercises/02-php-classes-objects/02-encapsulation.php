@@ -35,6 +35,13 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once __DIR__ . '/classes/EncapStudent.php';
+
+        $studentID = new StudentFile("Shania Nouvel Molina", "1234567890");
+        echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
+        // echo $studentID->name; //Fatal Error!
+
         ?>
     </div>
 
@@ -56,6 +63,11 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once __DIR__ . '/classes/EncapStudentV2.php';
+
+        $studentID = new StudentFileV2("Cassie Ella Molina", "0987654321");
+        echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
         ?>
     </div>
 
@@ -82,6 +94,11 @@
         // } catch (Exception $e) {
         //     echo "Error: " . $e->getMessage();
         // }
+
+        require_once __DIR__ . '/classes/EncapStudentV3.php';
+
+        $studentID = new StudentFileV3("Alice", "");
+        echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
         ?>
     </div>
 

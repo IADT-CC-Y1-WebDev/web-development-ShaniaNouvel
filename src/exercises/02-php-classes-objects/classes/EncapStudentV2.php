@@ -1,7 +1,7 @@
 <?php
-    class StudentV3 {
-        private $name;
-        Private $number;
+    class StudentFileV2 {
+        protected $name;
+        protected $number;
 
         public function __construct($name, $num) {
             $this->name = $name;

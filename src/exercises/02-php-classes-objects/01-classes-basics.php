@@ -99,7 +99,7 @@
 
         $studentID = new StudentV3("Shania Nouvel Molina", "1234567890");
 
-        echo "Student " . $studentID->name . " has number " . $studentID->number . ".";
+        echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
  
         ?>
     </div>
