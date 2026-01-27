@@ -1,12 +1,16 @@
 <?php
     class Student {
         protected $name;
-        protected $number;
+        protected $number = [];
 
         public function __construct($name, $num) {
+            // echo "Creating student: $name...<br>";
             $this->name = $name;
             $this->number = $num;
 
+            if ($num === '') {
+                throw new Exception("Student number cannot be empty");
+            } 
             
         }
 
@@ -14,16 +18,15 @@
             return $this->name;
         }
 
-        public function getNumber() {
-            try {
-                $student = new Student("Alice", "");
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
-            }
-
+        public function getNumber() {        
             return $this->number;
-
         }
+
+        public function __toString() {
+            $format = "Student: %s, %s";
+            return sprintf($format, $this->name, $this->number);
+        }
+
     }
     
 ?>

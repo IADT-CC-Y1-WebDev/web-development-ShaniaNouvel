@@ -32,7 +32,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $studentID01 = new Student("Shania Nouvel Molina", "1234567890");
+        echo "Name: " .$studentID01 ->getName() . "<br>";
+        echo "ID Number: " .$studentID01 ->getNumber() . "<br>";
+
+        $studentID02 = new Student("Cassie Ella Molina", "0987654321");
+        echo "Name: " .$studentID02 ->getName() . "<br>";
+        echo "ID Number: " .$studentID02 ->getNumber() . "<br>";
         ?>
     </div>
 
@@ -52,7 +60,11 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student = new Student("Cassie Ella Molina", "0987654321");
+        echo $student;
+
         ?>
     </div>
 
@@ -73,7 +85,19 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+
+        $class = [
+            "Shania" => "01234567890",
+            "Cassie" => "0987654321",
+            "Salehah" => "13729482938"
+        ];
+
+        foreach ($class as $studentName => $IDnumber) {
+            $student = new Student($studentName, $IDnumber);
+            echo $student . "<br>";
+        }
+
         ?>
     </div>
 
@@ -94,12 +118,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
-        // $student1 = new Student("Alice", "S001");
-        // $student2 = new Student("Bob", "S002");
-        // echo "Setting student1 to null...<br>";
-        // $student1 = null;
-        // echo "Script ending...<br>";
+        require_once __DIR__ . '/classes/Student.php';
+        $student1 = new Student("Shania", "1234567890");
+        $student2 = new Student("Ella", "0987654321");
+
+        echo $student1 . "<br>";
+        echo $student2 . "<br>";
+
+        echo "Student " . $student1->getName() ." has left the system. <br>";
+        $student1 = null;
         ?>
     </div>
 

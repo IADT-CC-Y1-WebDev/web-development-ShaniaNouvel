@@ -99,7 +99,7 @@
         require_once __DIR__ . '/classes/Student.php';
 
         $studentID = new Student("Alice", "");
-        echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
+        echo "Student " . $studentID->getName() . " ID number is" . $studentID->getNumber() . ".";
         ?>
     </div>
 
