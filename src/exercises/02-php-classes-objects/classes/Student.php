@@ -23,7 +23,7 @@
         }
 
         public function __toString() {
-            $format = "Student: %s, %s";
+            $format = "Student: %s, N%s";
             return sprintf($format, $this->name, $this->number);
         }
 

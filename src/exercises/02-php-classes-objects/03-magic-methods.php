@@ -95,7 +95,7 @@
 
         foreach ($class as $studentName => $IDnumber) {
             $student = new Student($studentName, $IDnumber);
-            echo $student . "<br>";
+            echo $student->getName() . "<br>";
         }
 
         ?>
