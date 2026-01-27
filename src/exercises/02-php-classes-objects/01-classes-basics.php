@@ -38,13 +38,17 @@
 
         require_once __DIR__ . '/classes/Student.php';
 
-        $studentID = new Student();
+        //EXERCISE 1 
+        // $studentID = new Student();
+        // $studentID ->name = "Shania Nouvel Molina";
+        // $studentID ->number = "1234567890"; 
+        // echo "Name: " .$studentID ->name . "<br>";
+        // echo "ID Number: " .$studentID ->number;
 
-        $studentID ->name = "Shania Nouvel Molina";
-        $studentID ->number = "1234567890"; 
+        $studentID = new Student("Shania Nouvel Molina", "1234567890");
 
-        echo "Name: " .$studentID ->name . "<br>";
-        echo "ID Number: " .$studentID ->number;
+        echo "Name: " .$studentID ->getName() . "<br>";
+        echo "ID Number: " .$studentID ->getNumber();
 
         ?>
     </div>
@@ -67,12 +71,22 @@
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
 
-        require_once __DIR__ . '/classes/StudentV2.php';
+        //EXERCISE 2
+        // require_once __DIR__ . '/classes/Student.php';
+        // $studentID02 = new Student("Shania Nouvel Molina", "1234567890");
+        // $studentID02 = new Student("Cassie Ella Molina", "1234567890");
+        // echo "Name: " .$studentID01->name . "<br>";
+        // echo "ID Number: " .$studentID->number;
+        // echo "Name: " .$studentID02->name . "<br>";
+        // echo "ID Number: " .$studentID->number;
 
-        $studentID = new StudentV2("Shania Nouvel Molina", "1234567890");
+        $studentID01 = new Student("Shania Nouvel Molina", "1234567890");
+        $studentID02 = new Student("Cassie Ella Molina", "0987654321");
 
-        echo "Account: " .$studentID->name . "<br>";
-        echo "ID Number: " .$studentID->number;
+        echo "Name: " .$studentID01 ->getName() . "<br>";
+        echo "ID Number: " .$studentID01 ->getNumber() . "<br>";
+        echo "Name: " .$studentID02 ->getName() . "<br>";
+        echo "ID Number: " .$studentID02 ->getNumber();
 
         ?>
     </div>
@@ -95,9 +109,9 @@
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
 
-        require_once __DIR__ . '/classes/StudentV3.php';
+        require_once __DIR__ . '/classes/Student.php';
 
-        $studentID = new StudentV3("Shania Nouvel Molina", "1234567890");
+        $studentID = new Student("Shania Nouvel Molina", "1234567890");
 
         echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
  

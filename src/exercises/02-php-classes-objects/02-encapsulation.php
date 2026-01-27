@@ -36,10 +36,11 @@
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
 
-        require_once __DIR__ . '/classes/EncapStudent.php';
+        require_once __DIR__ . '/classes/Student.php';
 
-        $studentID = new StudentFile("Shania Nouvel Molina", "1234567890");
+        $studentID = new Student("Shania Nouvel Molina", "1234567890");
         echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
+        
         // echo $studentID->name; //Fatal Error!
 
         ?>
@@ -64,9 +65,9 @@
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
 
-        require_once __DIR__ . '/classes/EncapStudentV2.php';
+        require_once __DIR__ . '/classes/Student.php';
 
-        $studentID = new StudentFileV2("Cassie Ella Molina", "0987654321");
+        $studentID = new Student("Cassie Ella Molina", "0987654321");
         echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
         ?>
     </div>
@@ -95,9 +96,9 @@
         //     echo "Error: " . $e->getMessage();
         // }
 
-        require_once __DIR__ . '/classes/EncapStudentV3.php';
+        require_once __DIR__ . '/classes/Student.php';
 
-        $studentID = new StudentFileV3("Alice", "");
+        $studentID = new Student("Alice", "");
         echo "Student " . $studentID->getName() . " has number " . $studentID->getNumber() . ".";
         ?>
     </div>
