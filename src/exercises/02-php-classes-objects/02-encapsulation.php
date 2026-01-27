@@ -89,17 +89,13 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
-        // try {
-        //     $student = new Student("Alice", "");
-        // } catch (Exception $e) {
-        //     echo "Error: " . $e->getMessage();
-        // }
-
         require_once __DIR__ . '/classes/Student.php';
 
-        $studentID = new Student("Alice", "");
-        echo "Student " . $studentID->getName() . " ID number is" . $studentID->getNumber() . ".";
+        try {
+            $student = new Student("Alice", "");
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
         ?>
     </div>
 
