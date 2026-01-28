@@ -36,7 +36,16 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
+        
+        $student1 = new Student ("Cassie Ella", "54321", "Designer", "Fourth Year");
+        echo Student::getCount() . $student1. "<br>";
+
+        $student2 = new Student ("Shania Nouvel", "09876", "Computing", "Second Year");
+        echo Student::getCount() . $student2 . "<br>";
+
+        $student3 = new Student ("Salehah Camille", "43820", "Vet", "Third Year");
+        echo Student::getCount() . $student3 . "<br>";
         ?>
     </div>
 
@@ -71,7 +80,20 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';        
+
+        $student1 = new Student ("Cassie Ella", "54321", "Designer", "Fourth Year");
+        $student2 = new Student ("Shania Nouvel", "09876", "Computing", "Second Year");
+        $student3 = new Student ("Salehah Camille", "43820", "Vet", "Third Year");
+        
+        echo "<strong>All Users:</strong><br>";
+        foreach (Student::findAll() as $users) {
+            echo $users . "<br>";
+        }
+
+        echo "<br><strong>Looking for account 09876:</strong></br>";
+        $found = Student::findByNumber("09876");
+        echo $found;
         ?>
     </div>
 
@@ -92,8 +114,22 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Undergrad.php';
-        // require_once __DIR__ . '/classes/Postgrad.php';
+        require_once __DIR__ . '/classes/Undergrad.php';
+        require_once __DIR__ . '/classes/Postgrad.php';
+
+        $student1 = new Student ("Cassie Ella", "54321", "Designer", "Third Year");
+        $student2 = new Undergrad ("Salehah Camille", "12345", "Computing", "First Year");
+        $student3 = new Postgrad ("Shania Nouvel", "12345", "John M.", "Computing");
+
+        echo "<strong>All Users:</strong><br>";
+        foreach (Student::findAll() as $users) {
+            echo $users . "<br>";
+        }
+
+        echo "<br><strong>Looking for account 12345:</strong></br>";
+        $found = Student::findByNumber("12345");
+        echo $found;
+
         ?>
     </div>
 
@@ -122,7 +158,7 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
-        // require_once __DIR__ . '/classes/Student.php';
+        require_once __DIR__ . '/classes/Student.php';
         ?>
     </div>
 

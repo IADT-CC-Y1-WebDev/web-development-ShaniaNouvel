@@ -28,6 +28,28 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        function calculateSquareRoot($number) {
+            if ($number < 0) {
+                throw new Exception("Invalid number");
+            }
+            return sqrt($number);
+        }
+
+        try {
+            $total = calculateSquareRoot(16);
+            echo "The Square root of 16 is " . $total . "<br>";
+
+            $total = calculateSquareRoot(25);
+            echo "The Square root of 25 is " . $total . "<br>";
+
+            $total = calculateSquareRoot(-9);
+            echo "Invalid Value" . "<br>";
+        }
+        catch (Exception $e) {
+            echo "Error: " . $e ->getMessage() . "<br>";
+        }
+
         ?>
     </div>
 
@@ -45,6 +67,29 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        
+        function validateEmail($email) {
+            if (strpos($email, '@') === false) {
+                throw new Exception("Invalid email");
+            }
+            return "$email is validated";
+        }
+
+        $emailAddress = [
+            "user@example.com",
+            "invalid-email",
+            "test@test.ie"
+        ];
+
+        foreach ($emailAddress as $email) {
+            try {
+                $result = validateEmail($email);
+                echo "$result<br>";
+            } 
+            catch (Exception $e) {
+                echo $e->getMessage() . "<br>";
+            }
+        }
         ?>
     </div>
 
@@ -61,6 +106,25 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        function processFile($filename) {
+            if ($filename === "") {
+                throw new Exception("Invalid filename!");
+            }
+            return "Processing complete." . "<br>" . "File $filename loaded.";
+        }
+
+        try {
+            $file = processFile("HOLA.mp4") ;
+            echo $file;
+        }
+        catch (Exception $e) {
+            echo $e->getMessage() . "<br>";
+        }
+        finally {
+            echo "<br>Cleanup complete</br>";
+        }
+
         ?>
     </div>
 
