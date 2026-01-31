@@ -16,7 +16,10 @@
             if ($num === "") {
                 throw new Exception("Student number cannot be empty");
             }
-            
+
+            self::$students[$num] = $this;
+            echo "Opened account for {$this->name}<br>";
+
         }
 
         public function getName() {
@@ -25,6 +28,15 @@
 
         public function getNumber() {        
             return $this->number;
+        }
+
+        public function leave() {
+            unset(self::$students[$this->name]);
+            echo "leaving and closing account for {$this->name}<br>";
+        }
+
+        public function __destruct() {
+            echo "Student {$this->number} has been destroyed <br>";
         }
 
         public function __toString() {
@@ -43,8 +55,6 @@
         public static function findByNumber($num) {
             return self::$students[$num] ?? null;
         }
-
-
     }
     
 ?>

@@ -117,9 +117,9 @@
         require_once __DIR__ . '/classes/Undergrad.php';
         require_once __DIR__ . '/classes/Postgrad.php';
 
-        $student1 = new Student ("Cassie Ella", "54321", "Designer", "Third Year");
-        $student2 = new Undergrad ("Salehah Camille", "12345", "Computing", "First Year");
-        $student3 = new Postgrad ("Shania Nouvel", "12345", "John M.", "Computing");
+        $student01 = new Student ("Cassie Ella", "54321", "Designer", "Third Year");
+        $student02 = new Undergrad ("Salehah Camille", "12345", "Computing", "First Year");
+        $student03 = new Postgrad ("Shania Nouvel", "12345", "John M.", "Computing");
 
         echo "<strong>All Users:</strong><br>";
         foreach (Student::findAll() as $users) {
@@ -159,6 +159,18 @@
         <?php
         // TODO: Write your solution here
         require_once __DIR__ . '/classes/Student.php';
+        
+        $student1 = new Student ("Cassie Ella", "54321", "Designer", "Fourth Year");
+        $student2 = new Student ("Shania Nouvel", "09876", "Computing", "Second Year");
+        $student3 = new Student ("Salehah Camille", "43820", "Vet", "Third Year");
+
+        echo "<br>Accounts logged in: " . Student::getCount() . "<br>";
+
+        echo "Closing Cassie Ella's account...<br>";
+        $student1->leave();  
+        unset($student1);   
+
+        echo "<br>Accounts remaining: " . Student::getCount() . "<br>";
         ?>
     </div>
 
