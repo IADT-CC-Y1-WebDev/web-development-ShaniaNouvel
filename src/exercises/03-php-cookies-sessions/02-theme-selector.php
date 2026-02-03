@@ -11,7 +11,9 @@
 // Hint: Check if session is not already started, then call session_start()
 // -----------------------------------------------------------------------------
 // TODO: Start the session here
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // =============================================================================
 
 // =============================================================================
@@ -23,6 +25,13 @@
 // 4. Call exit
 // -----------------------------------------------------------------------------
 // TODO: Handle cookie theme selection here
+if (isset($_GET['cookie_theme'])) {
+    // Set theme using a COOKIE (persists after browser closes)
+    $theme = $_GET['cookie_theme'];
+    setcookie('theme', $theme, time() + (60 * 60 * 24 * 30), '/');
+    header('Location: 02-theme-selector.php');
+    exit;
+}
 
 // =============================================================================
 
@@ -35,6 +44,12 @@
 // 4. Call exit
 // -----------------------------------------------------------------------------
 // TODO: Handle session theme selection here
+if (isset($_GET['session_theme'])) {
+    // Set theme using a SESSION (only lasts until browser closes)
+    $_SESSION['theme'] = $_GET['session_theme'];
+    header('Location: 02-theme-selector.php');
+    exit;
+}
 
 // =============================================================================
 
@@ -44,6 +59,17 @@
 // For $_GET['reset_session']: unset $_SESSION['theme']
 // -----------------------------------------------------------------------------
 // TODO: Handle reset actions here
+if (isset($_GET['reset_cookie'])) {
+    setcookie('theme', '', time() - 3600, '/');
+    header('Location: 02-theme-selector.php');
+    exit;
+}
+
+if (isset($_GET['reset_session'])) {
+    unset($_SESSION['theme']);
+    header('Location: 02-theme-selector.php');
+    exit;
+}
 
 // =============================================================================
 
@@ -102,7 +128,7 @@ $themes = [
 // -----------------------------------------------------------------------------
 // TODO: Apply the selected theme to the page by setting inline styles on <body>
 ?>
-<body style="">
+<body style="background: <?= $themes[$sessionTheme]['bg'] ?>; color: <?= $themes[$sessionTheme]['text'] ?>;">
 <?php
 // =============================================================================
 ?>
