@@ -119,7 +119,7 @@
 
         $student01 = new Student ("Cassie Ella", "54321", "Designer", "Third Year");
         $student02 = new Undergrad ("Salehah Camille", "12345", "Computing", "First Year");
-        $student03 = new Postgrad ("Shania Nouvel", "12345", "John M.", "Computing");
+        $student03 = new Postgrad ("Shania Nouvel", "23482", "John M.", "Computing");
 
         echo "<strong>All Users:</strong><br>";
         foreach (Student::findAll() as $users) {
