@@ -96,7 +96,7 @@
         // Exercise 1: Display the visit count
         // ---------------------------------------------------------------------
         // TODO Exercise 1: Write your solution here
-
+            echo "Visit count: " . $visitCount;
         // =====================================================================
         ?>
     </div>
