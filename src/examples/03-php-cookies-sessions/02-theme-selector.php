@@ -92,7 +92,7 @@ $themes = [
         }
     </style>
 </head>
-<body style="background: <?= $themes[$sessionTheme]['bg'] ?>; color: <?= $themes[$sessionTheme]['text'] ?>;">
+<body>
     <div class="back-link">
         <a href="index.php">&larr; Back to Cookies &amp; Sessions</a>
         <a href="/exercises/03-php-cookies-sessions/02-theme-selector.php">Go to Exercise &rarr;</a>
