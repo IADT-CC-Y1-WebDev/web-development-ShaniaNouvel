@@ -53,6 +53,7 @@ $formats = [
     <title>Add New Book - Exercise</title>
 </head>
 <body>
+    <?php require 'inc/flash_message.php'; ?>
     <div class="back-link">
         <a href="index.php">&larr; Back to Form Handling </a>
     </div>
@@ -226,7 +227,7 @@ $formats = [
         <div class="form-group">
             <label for="cover">Book Cover Image (max 2MB):</label>
             <!-- NOTE: File inputs cannot be repopulated for security reasons -->
-            <input type="file" id="cover" name="cover" accept="image/*">
+            <input type="file" id="cover" name="cover" accept="image/*" >
 
             <!-- TODO: Display error message if cover validation fails       -->
                 <?php if (error('cover')): ?>
