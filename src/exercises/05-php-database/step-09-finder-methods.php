@@ -28,7 +28,7 @@ require_once __DIR__ . '/lib/config.php';
 
         <div>
             <?php
-            class BookWithFinders
+            class Book
             {
                 public $id;
                 public $title;
@@ -65,7 +65,7 @@ require_once __DIR__ . '/lib/config.php';
 
                     $books = [];
                     while ($row = $stmt->fetch()) {
-                        $books[] = new BookWithFinders($row);
+                        $books[] = new Book($row);
                     }
 
                     return $books;
@@ -80,7 +80,7 @@ require_once __DIR__ . '/lib/config.php';
 
                     $row = $stmt->fetch();
                     if ($row) {
-                        return new BookWithFinders($row);
+                        return new Book($row);
                     }
 
                     return null;
@@ -95,7 +95,7 @@ require_once __DIR__ . '/lib/config.php';
 
                     $books = [];
                     while ($row = $stmt->fetch()) {
-                        $books[] = new BookWithFinders($row);
+                        $books[] = new Book($row);
                     }
 
                     return $books;

@@ -65,10 +65,10 @@ catch (PDOException $e) {
 
             $showStmt = $db->prepare("SELECT title, description FROM books WHERE id = :id");
             $showStmt->execute(['id' => 1]);
-            $game = $showStmt->fetch();
-            if ($game) {
-                echo "<p><strong>Book:</strong> " . htmlspecialchars($game['title']) . "</p>";
-                echo "<p><strong>New Description:</strong> " . htmlspecialchars($game['description']) . "</p>";
+            $book = $showStmt->fetch();
+            if ($book) {
+                echo "<p><strong>Book:</strong> " . htmlspecialchars($book['title']) . "</p>";
+                echo "<p><strong>New Description:</strong> " . htmlspecialchars($book['description']) . "</p>";
             }
             ?>
         </div>
