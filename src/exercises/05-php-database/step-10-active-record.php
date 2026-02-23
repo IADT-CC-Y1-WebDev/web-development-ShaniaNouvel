@@ -89,30 +89,26 @@ require_once __DIR__ . '/lib/config.php';
             $db = DB::getInstance()->getConnection();
                 $stmt = $db->prepare("SELECT id FROM books WHERE title = :title");
                 $stmt->execute(['title' => 'Active Record Book']);
-                $existing = $stmt->fetch();
+                $createdId = $stmt->fetch();
 
-            if (!$existing) {
+            if (!$createdId) {
                 try {
-                $book = new Book();
-                $book->title = "Test Book " . time();
-                $book->author = "Test Author";
-                $book->publisher_id = 1;
-                $book->year = 2024;
-                $book->description = "Created via Active Record pattern";
+                    $book = new Book();
+                    $book->title = "Test Book " . time();
+                    $book->author = "Test Author";
+                    $book->publisher_id = 1;
+                    $book->year = 2024;
+                    $book->description = "Created via Active Record pattern";
 
-                $book->save();
+                    $book->save();
 
-                if ($book->id) {
-                    echo "<p class='success'>Created book with ID: {$book->id}</p>";
-                } else {
-                    echo "<p class='warning'>save() didn't set the ID after INSERT</p>";
+                echo "<p class='success'>Created game with ID: " . $book->id . "</p>";
+                    echo "<p>Title: " . htmlspecialchars($book->title) . "</p>";
+                } catch (Exception $e) {
+                    echo "<p class='error'>Error: " . $e->getMessage() . "</p>";
                 }
-
-                $createdId = $book->id;
-            } catch (Exception $e) {
-                echo "<p class='warning'>save() not implemented: " . $e->getMessage() . "</p>";
-                $createdId = null;
-            }
+            } else {
+                echo "<p class='info'>Demo game already exists with ID: " . $createdId['id'] . "</p>";
             }
             ?>
         </div>
