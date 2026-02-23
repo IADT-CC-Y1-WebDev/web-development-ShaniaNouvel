@@ -25,10 +25,74 @@ require_once __DIR__ . '/lib/config.php';
             <li><code>delete()</code> - DELETE the record from the database</li>
         </ol>
 
+        <?php
+            function save()
+            {
+                if ($this->id) {
+                    // Update existing record
+                    $stmt = $this->db->prepare("
+                        UPDATE books
+                        SET title = :title,
+                            author = :author,
+                            publisher_id = :publisher_id,
+                            year = :year,
+                            isbn = :isbn,
+                            description = :description,
+                            cover_filename = :cover_filename
+                        WHERE id = :id
+                    ");
+
+                    $params = [
+                        'title' => $this->title,
+                        'author' => $this->author,
+                        'publisher_id' => $this->publisher_id,
+                        'year' => $this->year,
+                        'isbn' => $this->isbn,
+                        'description' => $this->description,
+                        'cover_filename' => $this->cover_filename,
+                        'id' => $this->id
+                    ];
+                } else {
+                    // Insert new record
+                    $stmt = $this->db->prepare("
+                        INSERT INTO books (title, author, publisher_id, year, isbn, description, cover_filename, id)
+                        VALUES (:title, :author, :publisher_id, :year, :isbn, :description, :cover_filename, :id)
+                    ");
+
+                    $params = [
+                        'title' => $this->title,
+                        'author' => $this->author,
+                        'publisher_id' => $this->publisher_id,
+                        'year' => $this->year,
+                        'isbn' => $this->isbn,
+                        'description' => $this->description,
+                        'cover_filename' => $this->cover_filename,
+                        'id' => $this->id
+                    ];
+                }
+
+                $status = $stmt->execute($params);
+
+                if (!$status || $stmt->rowCount() !== 1) {
+                    throw new Exception("Failed to save book.");
+                }
+
+                // Set ID for new records
+                if ($this->id === null) {
+                    $this->id = $this->db->lastInsertId();
+                }
+            }
+        ?>
         <h3>Test CREATE (new book):</h3>
         <div class="output">
             <?php
-            try {
+            $db = DB::getInstance()->getConnection();
+                $stmt = $db->prepare("SELECT id FROM books WHERE title = :title");
+                $stmt->execute(['title' => 'Active Record Book']);
+                $existing = $stmt->fetch();
+
+            if (!$existing) {
+                try {
                 $book = new Book();
                 $book->title = "Test Book " . time();
                 $book->author = "Test Author";
@@ -48,6 +112,7 @@ require_once __DIR__ . '/lib/config.php';
             } catch (Exception $e) {
                 echo "<p class='warning'>save() not implemented: " . $e->getMessage() . "</p>";
                 $createdId = null;
+            }
             }
             ?>
         </div>
