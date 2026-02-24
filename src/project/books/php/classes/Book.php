@@ -1,28 +1,5 @@
 <?php
-// =============================================================================
-// Exercise 8-10: Book Active Record Class
-//
-// TODO: Implement this class following the Active Record pattern.
-//
-// The class should represent the 'books' table with these columns:
-// - id (INT, auto-increment primary key)
-// - title (VARCHAR)
-// - author (VARCHAR)
-// - publisher_id (INT, foreign key to publishers table)
-// - year (INT)
-// - isbn (VARCHAR)
-// - description (TEXT)
-// - cover_filename (VARCHAR)
-//
-// Required methods:
-// - __construct($data = []) - Hydrate object from data array
-// - findAll() - Static method returning all books
-// - findById($id) - Static method returning single book or null
-// - findByPublisher($publisherId) - Static method returning books by publisher
-// - save() - Instance method to INSERT or UPDATE
-// - delete() - Instance method to DELETE
-// - toArray() - Instance method to convert to array
-// =============================================================================
+
 class Book
 {
     // public properties for each database column
@@ -38,9 +15,6 @@ class Book
     // private $db property for database connection
     private $db;
 
-    // =========================================================================
-    // Exercise 8: Book Class Basics
-    // =========================================================================
     public function __construct($data = [])
     {
         $this->db = DB::getInstance()->getConnection();
@@ -57,13 +31,8 @@ class Book
         }
     }
 
-    // =========================================================================
-    // Exercise 9: Finder Methods
-    // =========================================================================
     public static function findAll()
     {
-        // TODO: Implement this method
-        
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM books ORDER BY title");
         $stmt->execute();
@@ -77,12 +46,8 @@ class Book
         
     }
 
-    // =========================================================================
-    // Exercise 9: Finder Methods
-    // =========================================================================
     public static function findById($id)
     {
-        // TODO: Implement this method
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
@@ -164,8 +129,19 @@ class Book
 
         $status = $stmt->execute($params);
 
-        if (!$status || $stmt->rowCount() !== 1) {
-            throw new Exception("Failed to save book.");
+        if (!$status) {
+            $error_info = $stmt->errorInfo();
+            $message = sprintf(
+                "SQLSTATE error code: %d; error message: %s",
+                $error_info[0],
+                $error_info[2]
+            );
+            throw new Exception($message);  
+        }
+
+
+        if ($stmt->rowCount() !== 1) {
+            throw new Exception("Failed to save game.");
         }
 
         // Set ID for new records

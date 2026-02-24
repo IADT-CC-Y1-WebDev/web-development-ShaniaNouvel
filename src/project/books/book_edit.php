@@ -73,18 +73,18 @@ catch (PDOException $e) {
                     <div class="input">
                         <label class="special" for="title">Title:</label>
                         <div>
-                            <input type="text" id="title" name="title" value="<?= h(old('title')) ?>" required>
+                            <input type="text" id="title" name="title" value="<?= old('title', $book->title) ?>" required>
                             <p><?= error('title') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="author">Author</label>
                         <div>
-                            <input type="text" id="author" name="author" value="<?= h(old('author')) ?>" required>
+                            <input type="text" id="author" name="author" value="<?= old('author', $book->author) ?>" required>
                             <p><?= error('release_date') ?></p>
                         </div>
                     </div>
-                    <div class="input">
+                    <!-- <div class="input">
                         <label class="special" for="publisher_id">Genre:</label>
                         <div>
                             <select id="publisher_id" name="publisher_id">
@@ -99,18 +99,18 @@ catch (PDOException $e) {
                             </select>
                             <p><?= error('publisher_id') ?></p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="input">
                         <label class="special" for="year">Year</label>
                         <div>
-                            <input type="text" id="year" name="year" value="<?= h(old('year')) ?>" required>
+                            <input type="text" id="year" name="year" value="<?= old('year', $book->year) ?>" required>
                             <p><?= error('year') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="isbn">ISBN</label>
                         <div>
-                            <input type="text" id="isbn" name="isbn" value="<?= h(old('isbn')) ?>" required>
+                            <input type="text" id="isbn" name="isbn" value="<?= old('isbn', $book->isbn) ?>" required>
                             <p><?= error('isbn') ?></p>
                         </div>
                     </div>
@@ -135,15 +135,16 @@ catch (PDOException $e) {
                     <div class="input">
                         <label class="special" for="description">Description:</label>
                         <div>
-                            <textarea id="description" name="description" required><?= h(old('description')) ?></textarea>
+                            <textarea id="description" name="description" required><?= old('description', $book->description) ?></textarea>
                             <p><?= error('description') ?></p>
                         </div>
                     </div>
+                    <div><img src="images/<?= $book->cover_filename ?>" /></div>
                     <div class="input">
                         <label class="special" for="cover">Image (required):</label>
                         <div>
-                            <input type="file" id="cover" name="cover" accept="image/*" required>
-                            <p><?= error('image') ?></p>
+                            <input type="file" id="cover" name="cover" accept="cover/*" required>
+                            <p><?= error('cover') ?></p>
                         </div>
                     </div>
                     <div class="input">

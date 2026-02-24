@@ -4,7 +4,7 @@ require_once 'php/lib/utils.php';
 
 try {
     $books = Book::findAll();
-    //$publishers = Publishers::findAll();
+    // $publishers = Publishers::findAll();
     //$formats  = Formats::findAll();
 } 
 catch (PDOException $e) {
@@ -33,23 +33,14 @@ catch (PDOException $e) {
                             <input type="text" id="title_filter" name="title_filter">
                         </div>
                         <div>
-                            <label for="publisher_filter">Publisher:</label>
+                            <label for="publisher_filter">Publishers:</label>
                             <select id="publisher_filter" name="publisher_filter">
-                                <option value="">All Publisher</option>
+                                <option value="">All Publishers</option>
                                 <?php foreach ($publishers as $publisher) { ?>
                                     <option value="<?= h($publisher->id) ?>"><?= h($publisher->name) ?></option>
                                 <?php } ?>
                             </select>
                         </div>
-                        <!-- <div>
-                            <label for="genre_filter">Genre:</label>
-                            <select id="genre_filter" name="genre_filter">
-                                <option value="">All Genres</option>
-                                <?php foreach ($genres as $genre) { ?>
-                                    <option value="<?= h($genre->id) ?>"><?= h($genre->name) ?></option>
-                                <?php } ?>
-                            </select>
-                        </div> -->
                         <div>
                             <button type="button" id="apply_filters">Apply Filters</button>
                             <button type="button" id="clear_filters">Clear Filters</button>

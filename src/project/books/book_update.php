@@ -54,7 +54,7 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // Find existing game
+    // Find existing book
     $book = Book::findById($data['id']);
     if (!$book) {
         throw new Exception('Book not found.');

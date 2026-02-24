@@ -6,8 +6,6 @@ require_once 'php/lib/utils.php';
 
 startSession();
 
-
-
 try {
     // Initialize form data array
     $data = [];
@@ -28,7 +26,7 @@ try {
         'isbn' => $_POST['isbn'] ?? null,
         'format_ids' => $_POST['format_ids'] ?? [], 
         'description' => $_POST['description'] ?? null,
-        'cover' => $_FILES['cover'] ?? null
+        'cover_filename' => $_FILES['cover_filename'] ?? null
     ];
 
     // Define validation rules
@@ -41,10 +39,8 @@ try {
         'isbn' => 'required|notempty|min:13|max:13',
         'format_ids' => 'required|notempty|array|min:1|max:4',
         'description' => 'required|notempty|min:10|max:1000',
-        'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+        'cover_filename' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
-
-    
 
     // Validate all data (including file)
     $validator = new Validator($data, $rules);
@@ -65,7 +61,7 @@ try {
 
     // Process the uploaded image (validation already completed)
     $uploader = new ImageUpload();
-    $coverFilename = $uploader->process($_FILES['cover']);
+    $coverFilename = $uploader->process($_FILES['cover_filename']);
 
     if (!$coverFilename) {
         throw new Exception('Failed to process and save the image.');
@@ -84,14 +80,14 @@ try {
     // Save to database
     $book->save();
     // Create platform associations
-    // if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-    //     foreach ($data['format_ids'] as $formatId) {
-    //         // Verify platform exists before creating relationship
-    //         if (Platform::findById($formatId)) {
-    //             BookFormat::create($book->id, $formatId);
-    //         }
-    //     }
-    // }
+    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+        foreach ($data['format_ids'] as $formatId) {
+            // Verify platform exists before creating relationship
+            if (Platform::findById($formatId)) {
+                BookFormat::create($book->id, $formatId);
+            }
+        }
+    }
 
     // Clear any old form data
     clearFormData();
@@ -101,7 +97,7 @@ try {
     // Set success flash message
     setFlashMessage('success', 'Book stored successfully.');
 
-    // Redirect to book details page
+    // Redirect to game details page
     redirect('book_view.php?id=' . $book->id);
 }
 catch (Exception $e) {
