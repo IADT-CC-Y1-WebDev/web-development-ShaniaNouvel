@@ -15,7 +15,7 @@ catch (PDOException $e) {
 <html lang="en">
     <head>
         <?php include 'php/inc/head_content.php'; ?>
-        <title>Games</title>
+        <title>Books</title>
     </head>
     <body>
         <div class="container">
@@ -60,7 +60,7 @@ catch (PDOException $e) {
         </div>
         <div class="container">
             <?php if (empty($books)) { ?>
-                <p>No games found.</p>
+                <p>No books found.</p>
             <?php } else { ?>
                 <div class="width-12 cards">
                     <?php foreach ($books as $book) { ?>

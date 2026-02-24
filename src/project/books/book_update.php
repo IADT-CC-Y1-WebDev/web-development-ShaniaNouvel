@@ -6,14 +6,12 @@ require_once 'php/lib/utils.php';
 
 startSession();
 
-
-
 try {
     // Initialize form data array
     $data = [];
     // Initialize errors array
     $errors = [];
-
+    
     // Check if request is POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception('Invalid request method.');
@@ -44,52 +42,71 @@ try {
         'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
 
-    
-
     // Validate all data (including file)
     $validator = new Validator($data, $rules);
 
     if ($validator->fails()) {
+        // Get first error for each field
         foreach ($validator->errors() as $field => $fieldErrors) {
             $errors[$field] = $fieldErrors[0];
         }
+
         throw new Exception('Validation failed.');
     }
 
-    // All validation passed - now process and save
+    // Find existing game
+    $book = Book::findById($data['id']);
+    if (!$book) {
+        throw new Exception('Book not found.');
+    }
+
     // Verify genre exists
     // $genre = Genre::findById($data['genre_id']);
     // if (!$genre) {
     //     throw new Exception('Selected genre does not exist.');
     // }
 
+    // // Verify platforms exist
+    // foreach ($data['platform_ids'] as $platformId) {
+    //     if (!Platform::findById($platformId)) {
+    //         throw new Exception('One or more selected platforms do not exist.');
+    //     }
+    // }
+
     // Process the uploaded image (validation already completed)
+    $coverFilename = null;
     $uploader = new ImageUpload();
-    $coverFilename = $uploader->process($_FILES['cover']);
-
-    if (!$coverFilename) {
-        throw new Exception('Failed to process and save the image.');
+    if ($uploader->hasFile('cover')) {
+        // Delete old image
+        $uploader->deleteImage($book->cover_filename);
+        // Process new image
+        $coverFilename = $uploader->process($_FILES['cover']);
+        // Check for processing errors
+        if (!$coverFilename) {
+            throw new Exception('Failed to process and save the image.');
+        }
     }
-
-    // Create new book instance
-    $book = new Book();
+    
+    // Update the game instance
     $book->title = $data['title'];
     $book->author = $data['author'];
     $book->publisher_id = $data['publisher_id'];
     $book->year = $data['year'];
     $book->isbn = $data['isbn'];
     $book->description = $data['description'];
-    $book->cover_filename = $coverFilename;
+    if ($coverFilename) {
+        $book->cover_filename = $coverFilename;
+    }
 
     // Save to database
     $book->save();
-    // Create platform associations
-    // if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-    //     foreach ($data['format_ids'] as $formatId) {
-    //         // Verify platform exists before creating relationship
-    //         if (Platform::findById($formatId)) {
-    //             BookFormat::create($book->id, $formatId);
-    //         }
+
+    // Delete existing platform associations
+    //GamePlatform::deleteByGame($book->id);
+    // Create new platform associations
+    // if (!empty($data['platform_ids']) && is_array($data['platform_ids'])) {
+    //     foreach ($data['platform_ids'] as $platformId) {
+    //         GamePlatform::create($game->id, $platformId);
     //     }
     // }
 
@@ -99,14 +116,14 @@ try {
     clearFormErrors();
 
     // Set success flash message
-    setFlashMessage('success', 'Book stored successfully.');
+    setFlashMessage('success', 'Book updated successfully.');
 
-    // Redirect to book details page
+    // Redirect to game details page
     redirect('book_view.php?id=' . $book->id);
 }
 catch (Exception $e) {
     // Error - clean up uploaded image
-    if (isset($coverFilename) && $coverFilename) {
+    if ($coverFilename) {
         $uploader->deleteImage($coverFilename);
     }
 
@@ -117,5 +134,11 @@ catch (Exception $e) {
     setFormData($data);
     setFormErrors($errors);
 
-    redirect('book_create.php');
+    // Redirect back to edit page if there is an ID; otherwise, go to index page
+    if (isset($data['id']) && $data['id']) {
+        redirect('book_edit.php?id=' . $data['id']);
+    }
+    else {
+        redirect('index.php');
+    }
 }
