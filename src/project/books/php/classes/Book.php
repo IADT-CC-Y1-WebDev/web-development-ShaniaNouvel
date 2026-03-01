@@ -46,37 +46,32 @@ class Book
         
     }
 
-    public static function findById($id)
-    {
+    public static function findById($id){
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
 
         $row = $stmt->fetch();
-        if ($row) {
-            return new Book($row);
-        }
-
-        return null;
+        return $row ? new Book($row) : null;
     }
 
     // =========================================================================
     // Exercise 9: Finder Methods
     // =========================================================================
-    public static function findByPublisher($publisherId)
-    {
-        // TODO: Implement this method
-        $db = DB::getInstance()->getConnection();
-            $stmt = $db->prepare("SELECT * FROM books WHERE publisher_id = :publisher_id ORDER BY title");
-            $stmt->execute(['publisher_id' => $publisher_id]);
+    // public static function findByPublisher($publisherId)
+    // {
+    //     // TODO: Implement this method
+    //     $db = DB::getInstance()->getConnection();
+    //         $stmt = $db->prepare("SELECT * FROM books WHERE publisher_id = :publisher_id ORDER BY title");
+    //         $stmt->execute(['publisher_id' => $publisher_id]);
 
-            $books = [];
-            while ($row = $stmt->fetch()) {
-                $books[] = new Book($row);
-            }
+    //         $books = [];
+    //         while ($row = $stmt->fetch()) {
+    //             $books[] = new Book($row);
+    //         }
 
-            return $books;
-    }
+    //         return $books;
+    // }
 
     // =========================================================================
     // Exercise 10: Complete Active Record
@@ -123,7 +118,7 @@ class Book
                 'isbn' => $this->isbn,
                 'description' => $this->description,
                 'cover_filename' => $this->cover_filename,
-                'id' => $this->id
+                // 'id' => $this->id
             ];
         }
 
@@ -138,8 +133,21 @@ class Book
             );
             throw new Exception($message);  
         }
+        
+        $status = $stmt->execute($params);
 
+        // Check for errors
+        if (!$status) {
+            $error_info = $stmt->errorInfo();
+            $message = sprintf(
+                "SQLSTATE error code: %d; error message: %s",
+                $error_info[0],
+                $error_info[2]
+            );
+            throw new Exception($message);  
+        }
 
+        // Ensure one row affected
         if ($stmt->rowCount() !== 1) {
             throw new Exception("Failed to save game.");
         }
@@ -148,15 +156,20 @@ class Book
         if ($this->id === null) {
             $this->id = $this->db->lastInsertId();
         }
+        
     }
 
     // =========================================================================
     // Exercise 10: Complete Active Record
     // =========================================================================
-    public function delete()
-    {
-        // TODO: Implement this method
-        
+    public function delete(){
+        if (!$this->id) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare("DELETE FROM books WHERE id = :id");
+        return $stmt->execute(['id' => $this->id]);
+
     }
 
     // =========================================================================
@@ -164,6 +177,15 @@ class Book
     // =========================================================================
     public function toArray()
     {
-        // TODO: Implement this method
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'author' => $this->author,
+            'publisher_id' => $this->publisher_id,
+            'year' => $this->year,
+            'isbn' => $this->isbn,
+            'description' => $this->description,
+            'cover_filename' => $this->cover_filename
+        ];
     }
 }

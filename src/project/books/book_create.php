@@ -60,10 +60,10 @@ $formats = [
                         <label class="special" for="author">Author</label>
                         <div>
                             <input type="text" id="author" name="author" value="<?= old('author') ?>" required>
-                            <p><?= error('release_date') ?></p>
+                            <p><?= error('author') ?></p>
                         </div>
                     </div>
-                    <!-- <div class="input">
+                    <div class="input">
                         <label class="special" for="publisher_id">publishers:</label>
                         <div>
                             <select id="publisher_id" name="publisher_id">
@@ -78,7 +78,7 @@ $formats = [
                             </select>
                             <p><?= error('publisher_id') ?></p>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="input">
                         <label class="special" for="year">Year</label>
                         <div>
@@ -121,7 +121,7 @@ $formats = [
                     <div class="input">
                         <label class="special" for="cover">Image (required):</label>
                         <div>
-                            <input type="file" id="cover" name="cover" accept="cover/*" required>
+                            <input type="file" id="cover" name="cover" accept="image/*" required>
                             <p><?= error('cover') ?></p>
                         </div>
                     </div>

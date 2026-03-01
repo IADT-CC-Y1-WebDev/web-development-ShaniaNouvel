@@ -84,8 +84,8 @@ catch (PDOException $e) {
                             <p><?= error('release_date') ?></p>
                         </div>
                     </div>
-                    <!-- <div class="input">
-                        <label class="special" for="publisher_id">Genre:</label>
+                    <div class="input">
+                        <label class="special" for="publisher_id">publishers:</label>
                         <div>
                             <select id="publisher_id" name="publisher_id">
                                 <option value="">-- Select Publisher --</option>
@@ -99,7 +99,7 @@ catch (PDOException $e) {
                             </select>
                             <p><?= error('publisher_id') ?></p>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="input">
                         <label class="special" for="year">Year</label>
                         <div>
@@ -141,9 +141,9 @@ catch (PDOException $e) {
                     </div>
                     <div><img src="images/<?= $book->cover_filename ?>" /></div>
                     <div class="input">
-                        <label class="special" for="cover">Image (required):</label>
+                        <label class="special" for="cover">Image (optional):</label>
                         <div>
-                            <input type="file" id="cover" name="cover" accept="cover/*" required>
+                            <input type="file" id="cover" name="cover" accept="image/*" required>
                             <p><?= error('cover') ?></p>
                         </div>
                     </div>

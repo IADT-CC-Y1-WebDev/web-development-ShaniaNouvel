@@ -4,13 +4,12 @@ require_once 'php/lib/session.php';
 require_once 'php/lib/forms.php';
 require_once 'php/lib/utils.php';
 
+    $data = [];
+    $errors = [];
+
 startSession();
 
 try {
-    // Initialize form data array
-    $data = [];
-    // Initialize errors array
-    $errors = [];
 
     // Check if request is POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -26,7 +25,7 @@ try {
         'isbn' => $_POST['isbn'] ?? null,
         'format_ids' => $_POST['format_ids'] ?? [], 
         'description' => $_POST['description'] ?? null,
-        'cover_filename' => $_FILES['cover_filename'] ?? null
+        'cover' => $_FILES['cover'] ?? null
     ];
 
     // Define validation rules
@@ -39,7 +38,7 @@ try {
         'isbn' => 'required|notempty|min:13|max:13',
         'format_ids' => 'required|notempty|array|min:1|max:4',
         'description' => 'required|notempty|min:10|max:1000',
-        'cover_filename' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+        'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
 
     // Validate all data (including file)
@@ -61,9 +60,9 @@ try {
 
     // Process the uploaded image (validation already completed)
     $uploader = new ImageUpload();
-    $coverFilename = $uploader->process($_FILES['cover_filename']);
+    $cover_filename = $uploader->process($_FILES['cover']);
 
-    if (!$coverFilename) {
+    if (!$cover_filename) {
         throw new Exception('Failed to process and save the image.');
     }
 
@@ -75,19 +74,19 @@ try {
     $book->year = $data['year'];
     $book->isbn = $data['isbn'];
     $book->description = $data['description'];
-    $book->cover_filename = $coverFilename;
+    $book->cover_filename = $cover_filename;
 
     // Save to database
     $book->save();
     // Create platform associations
-    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-        foreach ($data['format_ids'] as $formatId) {
-            // Verify platform exists before creating relationship
-            if (Platform::findById($formatId)) {
-                BookFormat::create($book->id, $formatId);
-            }
-        }
-    }
+    // if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+    //     foreach ($data['format_ids'] as $formatId) {
+    //         // Verify platform exists before creating relationship
+    //         if (Platform::findById($formatId)) {
+    //             BookFormat::create($book->id, $formatId);
+    //         }
+    //     }
+    // }
 
     // Clear any old form data
     clearFormData();
@@ -102,8 +101,8 @@ try {
 }
 catch (Exception $e) {
     // Error - clean up uploaded image
-    if (isset($coverFilename) && $coverFilename) {
-        $uploader->deleteImage($coverFilename);
+    if (isset($cover_filename) && $cover_filename) {
+        $uploader->deleteImage($cover_filename);
     }
 
     // Set error flash message
