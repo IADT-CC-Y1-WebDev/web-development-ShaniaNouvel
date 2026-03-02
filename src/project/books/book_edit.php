@@ -20,31 +20,21 @@ try {
         throw new Exception("Book not found.");
     }
 
-    // $gamePlatforms = Platform::findByGame($game->id);
-    // $gamePlatformsIds = [];
-    // foreach ($gamePlatforms as $platform) {
-    //     $gamePlatformsIds[] = $platform->id;
-    // }
+    $bookFormats = Format::findByBook($book->id);
+    $bookFormatsIds = [];
+    foreach ($bookFormats as $format) {
+        $bookFormatsIds[] = $format->id;
+    }
 
     $publishers = Publisher::findAll();
-    // $platforms = Platform::findAll();
+    $formats = Format::findAll();
 
-    // $publishers = [
-    //     ['id' => 1, 'name' => 'Penguin Random House'],
-    //     ['id' => 2, 'name' => 'HarperCollins'],
-    //     ['id' => 3, 'name' => 'Simon & Schuster'],
-    //     ['id' => 4, 'name' => 'Hachette Book Group'],
-    //     ['id' => 5, 'name' => 'Macmillan Publishers'],
-    //     ['id' => 6, 'name' => 'Scholastic Corporation'],
-    //     ['id' => 7, 'name' => 'O\'Reilly Media']
+    // $formats = [
+    //     ['id' => 1, 'name' => 'Hardcover'],
+    //     ['id' => 2, 'name' => 'Paperback'],
+    //     ['id' => 3, 'name' => 'Ebook'],
+    //     ['id' => 4, 'name' => 'Audiobook']
     // ];
-
-    $formats = [
-        ['id' => 1, 'name' => 'Hardcover'],
-        ['id' => 2, 'name' => 'Paperback'],
-        ['id' => 3, 'name' => 'Ebook'],
-        ['id' => 4, 'name' => 'Audiobook']
-    ];
 }
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
@@ -112,23 +102,22 @@ catch (PDOException $e) {
                             <p><?= error('isbn') ?></p>
                         </div>
                     </div>
-                    <div class="input">
-                        <label class="special">Available Formats:</label>
-                        <div class="checkbox-group">
-                            <?php foreach ($formats as $format): ?>
-                                <label class="checkbox-label">
+                   <div class="input">
+                        <label class="special">Formats:</label>
+                        <div>
+                            <?php foreach ($formats as $format) { ?>
+                                <div>
                                     <input type="checkbox" 
+                                        id="format_<?= h($format->id) ?>" 
                                         name="format_ids[]" 
-                                        value="<?= $format['id'] ?>"
-                                        <?= chosen('format_ids' , $format['id']) ? "checked" : "" ?>
+                                        value="<?= h($format->id) ?>"
+                                        <?= chosen('format_ids', $format->id, $bookFormatsIds) ? "checked" : "" ?>
                                     >
-                                    <?= h($format['name']) ?>
-                                </label>
-                            <?php endforeach; ?>
+                                    <label for="format_<?= h($format->id) ?>"><?= h($format->name) ?></label>
+                                </div>
+                            <?php } ?>
                         </div>
-                        <?php if (error('format_id')): ?>
-                        <p class="error"><?= error('format_id') ?></p>
-                        <?php endif; ?>
+                        <p><?= error('format_ids') ?></p>
                     </div>
                     <div class="input">
                         <label class="special" for="description">Description:</label>
@@ -141,7 +130,7 @@ catch (PDOException $e) {
                     <div class="input">
                         <label class="special" for="cover">Image (optional):</label>
                         <div>
-                            <input type="file" id="cover" name="cover" accept="image/*" required>
+                            <input type="file" id="cover" name="cover" accept="image/*">
                             <p><?= error('cover') ?></p>
                         </div>
                     </div>

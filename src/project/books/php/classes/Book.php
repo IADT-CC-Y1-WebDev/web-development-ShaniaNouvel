@@ -58,20 +58,20 @@ class Book
     // =========================================================================
     // Exercise 9: Finder Methods
     // =========================================================================
-    // public static function findByPublisher($publisherId)
-    // {
-    //     // TODO: Implement this method
-    //     $db = DB::getInstance()->getConnection();
-    //         $stmt = $db->prepare("SELECT * FROM books WHERE publisher_id = :publisher_id ORDER BY title");
-    //         $stmt->execute(['publisher_id' => $publisher_id]);
+    public static function findByPublisher($publisherId)
+    {
+        // TODO: Implement this method
+        $db = DB::getInstance()->getConnection();
+            $stmt = $db->prepare("SELECT * FROM books WHERE publisher_id = :publisher_id ORDER BY title");
+            $stmt->execute(['publisher_id' => $publisherId]);
 
-    //         $books = [];
-    //         while ($row = $stmt->fetch()) {
-    //             $books[] = new Book($row);
-    //         }
+            $books = [];
+            while ($row = $stmt->fetch()) {
+                $books[] = new Book($row);
+            }
 
-    //         return $books;
-    // }
+            return $books;
+    }
 
     // =========================================================================
     // Exercise 10: Complete Active Record
@@ -106,8 +106,8 @@ class Book
         } else {
             // Insert new record
             $stmt = $this->db->prepare("
-                INSERT INTO books (title, author, publisher_id, year, isbn, description, cover_filename, id)
-                VALUES (:title, :author, :publisher_id, :year, :isbn, :description, :cover_filename, :id)
+                INSERT INTO books (title, author, publisher_id, year, isbn, description, cover_filename)
+                VALUES (:title, :author, :publisher_id, :year, :isbn, :description, :cover_filename)
             ");
 
             $params = [
@@ -121,18 +121,6 @@ class Book
                 // 'id' => $this->id
             ];
         }
-
-        $status = $stmt->execute($params);
-
-        if (!$status) {
-            $error_info = $stmt->errorInfo();
-            $message = sprintf(
-                "SQLSTATE error code: %d; error message: %s",
-                $error_info[0],
-                $error_info[2]
-            );
-            throw new Exception($message);  
-        }
         
         $status = $stmt->execute($params);
 
@@ -145,11 +133,6 @@ class Book
                 $error_info[2]
             );
             throw new Exception($message);  
-        }
-
-        // Ensure one row affected
-        if ($stmt->rowCount() !== 1) {
-            throw new Exception("Failed to save game.");
         }
 
         // Set ID for new records

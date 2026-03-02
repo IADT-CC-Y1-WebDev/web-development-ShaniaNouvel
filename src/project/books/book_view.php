@@ -13,13 +13,13 @@ try {
         die("<p>Error: Book not found.</p>");
     }
 
-    // $genre = Genre::findById($game->genre_id);
-    $publishers = Publisher::findByBook($book->id);
+    $publishers = Publisher::findById($book->publisher_id);
+    $formats = Format::findByBook($book->id);
 
-    // $platformNames = [];
-    // foreach ($platforms as $platform) {
-    //     $platformNames[] = htmlspecialchars($platform->name);
-    // }
+    $formatNames = [];
+    foreach ($formats as $format) {
+        $formatNames[] = htmlspecialchars($format->name);
+    }
 } 
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
@@ -56,7 +56,7 @@ catch (PDOException $e) {
                         <p>Author: <?= htmlspecialchars($book->author) ?></p>
                         <p>Year: <?= htmlspecialchars($book->year) ?></p>
                         <p>Description:<br /><?= nl2br(htmlspecialchars($book->description)) ?></p>
-                        <p>Publisher: <?= implode(', ', $publishers) ?></p>
+                        <p>Publisher: <?= implode(', ', $formatNames) ?></p>
                     </div>
                 </div>
             </div>

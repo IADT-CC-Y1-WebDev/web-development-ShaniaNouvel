@@ -19,6 +19,7 @@ try {
 
     // Get form data
     $data = [
+        'id' => $_POST['id'] ?? null,
         'title' => $_POST['title'] ?? null,
         'author' => $_POST['author'] ?? null,
         'publisher_id' => $_POST['publisher_id'] ?? null,
@@ -32,6 +33,7 @@ try {
     // Define validation rules
     $year = date("Y");
     $rules = [
+        'id' => 'required|notempty|min:1|max:255',
         'title' => 'required|notempty|min:1|max:255',
         'author' => 'required|notempty|min:1|max:255',
         'publisher_id' => 'required|notempty|integer',
@@ -67,11 +69,11 @@ try {
     }
 
     // // Verify platforms exist
-    // foreach ($data['platform_ids'] as $platformId) {
-    //     if (!Platform::findById($platformId)) {
-    //         throw new Exception('One or more selected platforms do not exist.');
-    //     }
-    // }
+    foreach ($data['format_ids'] as $formatId) {
+        if (!Format::findById($formatId)) {
+            throw new Exception('One or more selected formats do not exist.');
+        }
+    }
 
     // Process the uploaded image (validation already completed)
     $coverFilename = null;
@@ -88,6 +90,7 @@ try {
     }
     
     // Update the game instance
+    $book->id = $data['id'];
     $book->title = $data['title'];
     $book->author = $data['author'];
     $book->publisher_id = $data['publisher_id'];
@@ -102,13 +105,13 @@ try {
     $book->save();
 
     // Delete existing platform associations
-    //GamePlatform::deleteByGame($book->id);
-    // Create new platform associations
-    // if (!empty($data['platform_ids']) && is_array($data['platform_ids'])) {
-    //     foreach ($data['platform_ids'] as $platformId) {
-    //         GamePlatform::create($game->id, $platformId);
-    //     }
-    // }
+    BookFormat::deleteByBook($book->id);
+    // Create new format associations
+    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+        foreach ($data['format_ids'] as $formatId) {
+            BookFormat::create($book->id, $formatId);
+        }
+    }
 
     // Clear any old form data
     clearFormData();

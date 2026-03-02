@@ -4,12 +4,12 @@ require_once 'php/lib/session.php';
 require_once 'php/lib/forms.php';
 require_once 'php/lib/utils.php';
 
-    $data = [];
-    $errors = [];
 
 startSession();
 
 try {
+    $data = [];
+    $errors = [];
 
     // Check if request is POST
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -79,14 +79,14 @@ try {
     // Save to database
     $book->save();
     // Create platform associations
-    // if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-    //     foreach ($data['format_ids'] as $formatId) {
-    //         // Verify platform exists before creating relationship
-    //         if (Platform::findById($formatId)) {
-    //             BookFormat::create($book->id, $formatId);
-    //         }
-    //     }
-    // }
+    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+        foreach ($data['format_ids'] as $formatId) {
+            // Verify platform exists before creating relationship
+            if (Format::findById($formatId)) {
+                BookFormat::create($book->id, $formatId);
+            }
+        }
+    }
 
     // Clear any old form data
     clearFormData();

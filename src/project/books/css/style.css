@@ -13,10 +13,10 @@ body {
 }
 
 .card {
-	background-color: #f4f4f4;
+	background-color: #f8efff;
 	padding: 16px;
 	border-radius: 7px;
-	border: 1px solid #bcbcbc;
+	border: 1px solid #632792;
 	width: 285px;
 	display: flex;
 	flex-direction: column;
@@ -26,14 +26,16 @@ body {
 .card h2 {
 	font-size: 28px;
 	line-height: 32px;
-	font-family: "IBM Plex Serif";
-	margin-bottom: 12px;
+	font-family: serif;
+	margin-bottom: 8px;
 	font-weight: 300;
-	color: #016040;
+	color: #3d0160;
 }
 
 .card p {
 	margin-bottom: 10px;
+	font-family: serif;
+	color: #2f0248;
 }
 
 .card .actions {
@@ -59,6 +61,7 @@ body {
 	object-fit: cover;
 	border: 1px solid #7c75f1;
 	height: 340px;
+	box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .filters {
