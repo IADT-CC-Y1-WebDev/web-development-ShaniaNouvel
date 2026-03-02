@@ -126,8 +126,8 @@ try {
 }
 catch (Exception $e) {
     // Error - clean up uploaded image
-    if ($cover_filename) {
-        $uploader->deleteImage($cover_filename);
+    if ($coverFilename) {
+        $uploader->deleteImage($coverFilename);
     }
 
     // Set error flash message
