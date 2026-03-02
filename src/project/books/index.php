@@ -42,6 +42,15 @@ catch (PDOException $e) {
                             </select>
                         </div>
                         <div>
+                            <label for="format_filter">Format:</label>
+                            <select id="format_filter" name="format_filter">
+                                <option value="">All Formats</option>
+                                <?php foreach ($formats as $format) { ?>
+                                    <option value="<?= h($format->id) ?>"><?= h($format->name) ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div>
                             <button type="button" id="apply_filters">Apply Filters</button>
                             <button type="button" id="clear_filters">Clear Filters</button>
                         </div>

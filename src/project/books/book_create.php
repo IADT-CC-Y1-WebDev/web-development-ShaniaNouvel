@@ -48,7 +48,7 @@ catch (PDOException $e) {
                         </div>
                     </div>
                     <div class="input">
-                        <label class="special" for="publisher_id">publishers:</label>
+                        <label class="special" for="publisher_id">Publishers:</label>
                         <div>
                             <select id="publisher_id" name="publisher_id">
                                 <option value="">-- Select Publisher --</option>

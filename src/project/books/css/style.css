@@ -65,7 +65,7 @@ body {
 }
 
 .filters {
-	background-color: #f2f2f2;
+	background-color: #f8efff;
 	padding: 10px;
 	display: flex;
 	justify-content: flex-end;
@@ -79,27 +79,34 @@ body {
 }
 
 .filters form label {
-	font-size: 12px;
+	font-size: 14px;
+	font-family: serif;
+    color: #2f0248;
 }
 
 .filters form input {
-	font-size: 12px;
+	font-size: 14px;
 	height: 30px;
 	padding: 5px;
+	font-family: serif;
+    color: #2f0248;
+	border: 1px solid #632792;
 }
 
 .filters form select {
-	font-size: 12px;
+	font-size: 14px;
 	height: 30px;
 	padding: 5px;
+	font-family: serif;
+    color: #2f0248;
 }
 
 .filters form button {
 	font-size: 13px;
-	background-color: #084108;
+	background-color: #2f0248;
 	padding: 5px 10px;
 	color: #ececec;
-	border: 1px solid #4bff3c;
+	border: 1px solid #632792;
 	border-radius: 5px;
 }
 
@@ -111,10 +118,10 @@ body {
 
 .button {
 	font-size: 13px;
-	background-color: #123991;
+	background-color: #b06aff;
 	padding: 5px 10px;
 	color: #ececec;
-	border: 1px solid #4bff3c;
+	border: 1px solid #2f0248;
 	border-radius: 5px;
 }
 
