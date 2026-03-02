@@ -26,18 +26,18 @@ try {
     //     $gamePlatformsIds[] = $platform->id;
     // }
 
-    // $genres = Genre::findAll();
+    $publishers = Publisher::findAll();
     // $platforms = Platform::findAll();
 
-    $publishers = [
-        ['id' => 1, 'name' => 'Penguin Random House'],
-        ['id' => 2, 'name' => 'HarperCollins'],
-        ['id' => 3, 'name' => 'Simon & Schuster'],
-        ['id' => 4, 'name' => 'Hachette Book Group'],
-        ['id' => 5, 'name' => 'Macmillan Publishers'],
-        ['id' => 6, 'name' => 'Scholastic Corporation'],
-        ['id' => 7, 'name' => 'O\'Reilly Media']
-    ];
+    // $publishers = [
+    //     ['id' => 1, 'name' => 'Penguin Random House'],
+    //     ['id' => 2, 'name' => 'HarperCollins'],
+    //     ['id' => 3, 'name' => 'Simon & Schuster'],
+    //     ['id' => 4, 'name' => 'Hachette Book Group'],
+    //     ['id' => 5, 'name' => 'Macmillan Publishers'],
+    //     ['id' => 6, 'name' => 'Scholastic Corporation'],
+    //     ['id' => 7, 'name' => 'O\'Reilly Media']
+    // ];
 
     $formats = [
         ['id' => 1, 'name' => 'Hardcover'],
@@ -90,10 +90,8 @@ catch (PDOException $e) {
                             <select id="publisher_id" name="publisher_id">
                                 <option value="">-- Select Publisher --</option>
                                 <?php foreach ($publishers as $pub): ?>
-                                    <option value="<?= $pub['id'] ?>" 
-                                        <?= chosen('publisher_id', $pub['id']) ? "selected" : "" ?>
-                                    >
-                                        <?= h($pub['name']) ?>
+                                    <option value="<?= h($pub->id) ?>" <?= chosen('publisher_id', $pub->id, $book->publisher_id) ? "selected" : "" ?>>
+                                        <?= h($pub->name) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>

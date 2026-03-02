@@ -14,7 +14,7 @@ try {
     }
 
     // $genre = Genre::findById($game->genre_id);
-    //$publishers = Publisher::findByBook($book->id);
+    $publishers = Publisher::findByBook($book->id);
 
     // $platformNames = [];
     // foreach ($platforms as $platform) {
@@ -56,7 +56,7 @@ catch (PDOException $e) {
                         <p>Author: <?= htmlspecialchars($book->author) ?></p>
                         <p>Year: <?= htmlspecialchars($book->year) ?></p>
                         <p>Description:<br /><?= nl2br(htmlspecialchars($book->description)) ?></p>
-                        <!-- <p>Publisher: <?= implode(', ', $publishers) ?></p> -->
+                        <p>Publisher: <?= implode(', ', $publishers) ?></p>
                     </div>
                 </div>
             </div>

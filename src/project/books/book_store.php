@@ -53,10 +53,10 @@ try {
 
     // All validation passed - now process and save
     // Verify genre exists
-    // $genre = Genre::findById($data['genre_id']);
-    // if (!$genre) {
-    //     throw new Exception('Selected genre does not exist.');
-    // }
+    $publishers = Publisher::findById($data['publisher_id']);
+    if (!$publishers) {
+        throw new Exception('Selected publisher does not exist.');
+    }
 
     // Process the uploaded image (validation already completed)
     $uploader = new ImageUpload();
