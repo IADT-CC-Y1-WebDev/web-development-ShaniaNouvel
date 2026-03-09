@@ -41,7 +41,7 @@ try {
         'isbn' => 'required|notempty|min:13|max:13',
         'format_ids' => 'required|notempty|array|min:1|max:4',
         'description' => 'required|notempty|min:10|max:1000',
-        'cover' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+        'cover' => 'file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
 
     // Validate all data (including file)
@@ -62,13 +62,13 @@ try {
         throw new Exception('Book not found.');
     }
 
-    // Verify genre exists
+    // Verify publisher exists
     $publishers = Publisher::findById($data['publisher_id']);
     if (!$publishers) {
         throw new Exception('Selected publisher does not exist.');
     }
 
-    // // Verify platforms exist
+    // // Verify formats exist
     foreach ($data['format_ids'] as $formatId) {
         if (!Format::findById($formatId)) {
             throw new Exception('One or more selected formats do not exist.');
