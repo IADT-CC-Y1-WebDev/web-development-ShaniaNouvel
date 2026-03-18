@@ -33,6 +33,8 @@ catch (PDOException $e) {
             </div>
             <div class="width-12">
                 <form action="book_store.php" method="POST" enctype="multipart/form-data" novalidate>
+                    <div id="error_summary_top" class="error-summary" style="display:none" role="alert"></div>
+                
                     <div class="input">
                         <label class="special" for="title">Title:</label>
                         <div>
@@ -107,12 +109,13 @@ catch (PDOException $e) {
                         </div>
                     </div>
                     <div class="input">
-                        <button  class="button" type="submit">Store Book</button>
+                        <button id='submit_btn' class="button" type="submit">Store Book</button>
                         <div class="button"><a href="index.php">Cancel</a></div>
                     </div>
                 </form>
             </div>
         </div>
+        <script src="js/books_formCreate.js"></script>
     </body>
 </html>
 <?php
