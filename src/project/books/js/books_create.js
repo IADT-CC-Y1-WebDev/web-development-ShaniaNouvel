@@ -14,11 +14,13 @@ let formatIdsInput = document.getElementsByName('format_ids[]');
 let coverInput = document.getElementById('cover');
 
 let titleError = document.getElementById('title_error');
-let releaseDateError = document.getElementById('release_date_error');
-let genreIdError = document.getElementById('genre_id_error');
+let authorError = document.getElementById('author_error');
+let publisherIdError = document.getElementById('publisher_id_error');
 let descriptionError = document.getElementById('description_error');
-let platformIdsError = document.getElementById('platform_ids_error');
-let imageError = document.getElementById('image_error');
+let yearError = document.getElementById('year_error');
+let isbnError = document.getElementById('isbn_error');
+let formatIdsError = document.getElementsByName('format_ids_error');
+let coverError= document.getElementById('cover_error');
 
 let errors = {};
 
@@ -48,11 +50,13 @@ function showErrorSummaryTop() {
 
 function showFieldErrors() {
     titleError.innerHTML = errors.title || '';
-    releaseDateError.innerHTML = errors.release_date || '';
-    genreIdError.innerHTML = errors.genre_id || '';
+    authorError.innerHTML = errors.author || '';
+    publisherIdError.innerHTML = errors.publisher_id || '';
     descriptionError.innerHTML = errors.description || '';
-    platformIdsError.innerHTML = errors.platform_ids || '';
-    imageError.innerHTML = errors.image || '';
+    yearError.innerHTML = errors.year || '';
+    isbnError.innerHTML = errors.isbn || '';
+    formatIdsError.innerHTML = errors.format_ids || '';
+    coverError.innerHTML = errors.cover || '';
 }
 
 function isRequired(value) {

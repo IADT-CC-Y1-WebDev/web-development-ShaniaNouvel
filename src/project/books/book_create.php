@@ -39,14 +39,14 @@ catch (PDOException $e) {
                         <label class="special" for="title">Title:</label>
                         <div>
                             <input type="text" id="title" name="title" value="<?= old('title') ?>" required>
-                            <p><?= error('title') ?></p>
+                            <p id="title_error"><?= error('title') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="author">Author</label>
                         <div>
                             <input type="text" id="author" name="author" value="<?= old('author') ?>" required>
-                            <p><?= error('author') ?></p>
+                            <p id="author_error"><?= error('author') ?></p>
                         </div>
                     </div>
                     <div class="input">
@@ -60,21 +60,21 @@ catch (PDOException $e) {
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <p><?= error('publisher_id') ?></p>
+                            <p id="publisher_id_error"><?= error('publisher_id') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="year">Year</label>
                         <div>
                             <input type="text" id="year" name="year" value="<?= old('year') ?>" required>
-                            <p><?= error('year') ?></p>
+                            <p id="year_error"><?= error('year') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="isbn">ISBN</label>
                         <div>
                             <input type="text" id="isbn" name="isbn" value="<?= old('isbn') ?>" required>
-                            <p><?= error('isbn') ?></p>
+                            <p id="isbn_error"><?= error('isbn') ?></p>
                         </div>
                     </div>
                     <div class="input">
@@ -92,20 +92,20 @@ catch (PDOException $e) {
                                 </div>
                             <?php } ?>
                         </div>
-                        <p><?= error('format_ids') ?></p>
+                        <span id="format_ids_error"><?= error('format_ids[]') ?></span>
                     </div>
                     <div class="input">
                         <label class="special" for="description">Description:</label>
                         <div>
                             <textarea id="description" name="description" required><?= old('description') ?></textarea>
-                            <p><?= error('description') ?></p>
+                            <p id="description_error"><?= error('description') ?></p>
                         </div>
                     </div>
                     <div class="input">
                         <label class="special" for="cover">Image (required):</label>
                         <div>
                             <input type="file" id="cover" name="cover" accept="image/*" required>
-                            <p><?= error('cover') ?></p>
+                            <p id="cover_error"><?= error('cover') ?></p>
                         </div>
                     </div>
                     <div class="input">
@@ -115,7 +115,7 @@ catch (PDOException $e) {
                 </form>
             </div>
         </div>
-        <script src="js/books_formCreate.js"></script>
+        <script src="js/books_create.js"></script>
     </body>
 </html>
 <?php
