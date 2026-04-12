@@ -221,14 +221,20 @@ $rememberedUser = isset($_COOKIE['remembered_user']) ? $_COOKIE['remembered_user
     <div class="output">
         <?php
         // TODO: After testing, write a comment explaining:
+        echo "<strong> 1. What is the session used for? </strong>" . 
+             "<br> > Session keeps track of which user is still logged in." . 
+             "<br><strong> 2. What is the cookie used for? </strong> " . 
+             "<br> > Remembers which user was recently logged in." . 
+             "<br><strong> 3. Why use both together? </strong>" . 
+             "<br> > Session focuses on who is currently logged on actiivly whilst cookie focuses on bringing back the users info who has left and returned.";
         // 1. What is the session used for?
-        // > session keeps track of which user is still logged in.
+        // > Session keeps track of which user is still logged in.
         
         // 2. What is the cookie used for?
-        // > remembers which user was recently logged in.
+        // > Remembers which user was recently logged in.
 
         // 3. Why use both together?
-        // > session focuses on who is currently logged on actiivly whilst cookie focuses on bringing back the users info who has left and returned.
+        // > Session focuses on who is currently logged on actiivly whilst cookie focuses on bringing back the users info who has left and returned.
         ?>
     </div>
 

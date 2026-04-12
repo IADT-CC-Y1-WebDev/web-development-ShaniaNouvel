@@ -74,8 +74,8 @@ if (isset($_GET['reset_session'])) {
 // =============================================================================
 
 // Get current theme values (these are provided for you)
-$cookieTheme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'not set';
-$sessionTheme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'not set';
+$cookieTheme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
+$sessionTheme = isset($_SESSION['theme']) ? $_SESSION['theme'] : 'light';
 
 // Available themes with their colors
 $themes = [

@@ -20,12 +20,7 @@
     $expiryTime = time() + (60 * 60 * 24 * 30); // 30 days from now
     setcookie('visit_count', $visitCount, $expiryTime, '/');
 
-    if (isset($_COOKIE['visit_count'])) {
-        $visitCount = (int)$_COOKIE['visit_count'];
-        echo "Hello, Welcome Back! You have visited $visitCount time(s).";
-    } else {
-        echo "Welcome this is your first visit ever!";
-    }  
+
     
 
 // =============================================================================
@@ -96,7 +91,12 @@
         // Exercise 1: Display the visit count
         // ---------------------------------------------------------------------
         // TODO Exercise 1: Write your solution here
-            echo "Visit count: " . $visitCount;
+            if (isset($_COOKIE['visit_count'])) {
+                $visitCount = (int)$_COOKIE['visit_count'];
+                echo "Hello, Welcome Back! You have visited $visitCount time(s).";
+            } else {
+                echo "New Visitor! Welcome!";
+            }  
         // =====================================================================
         ?>
     </div>
@@ -118,7 +118,11 @@
         // - "Welcome back!" if visitCount is greater than or equal to 10
         // ---------------------------------------------------------------------
         // TODO Exercise 2: Write your solution here
-        
+            if (isset($_COOKIE['visit_count'])) {
+                $visitCount = (int)$_COOKIE['visit_count'];
+            } else {
+                echo "Welcome this is your first visit ever!";
+            }  
         // =====================================================================
         ?>
     </div>
@@ -160,7 +164,6 @@
         // Example output: "Your last visit was: 2024-01-15 10:30:45"
         // ---------------------------------------------------------------------
         // TODO Exercise 4: Write your solution here
-            
         // =====================================================================
         ?>
         <?php if ($lastVisit !== null): ?>
