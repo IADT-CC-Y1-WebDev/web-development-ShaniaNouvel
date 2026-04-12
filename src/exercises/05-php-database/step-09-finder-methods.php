@@ -26,98 +26,6 @@ require_once __DIR__ . '/lib/config.php';
             <li><code>findByPublisher($publisherId)</code> - Return array of Books</li>
         </ol>
 
-        <div>
-            <?php
-            class Book
-            {
-                public $id;
-                public $title;
-                public $author;
-                public $publisher_id;
-                public $year;
-                public $isbn;
-                public $description;
-                public $cover_filename;
-
-                private $db;
-
-                public function __construct($data = [])
-                {
-                    $this->db = DB::getInstance()->getConnection();
-
-                    if (!empty($data)) {
-                        $this->id = $data['id'] ?? null;
-                        $this->title = $data['title'] ?? null;
-                        $this->author = $data['author'] ?? null;
-                        $this->publisher_id = $data['publisher_id'] ?? null;
-                        $this->year = $data['year'] ?? null;
-                        $this->isbn = $data['isbn'] ?? null;
-                        $this->description = $data['description'] ?? null;
-                        $this->cover_filename = $data['cover_filename'] ?? null;
-                    }
-                }
-
-                public static function findAll()
-                {
-                    $db = DB::getInstance()->getConnection();
-                    $stmt = $db->prepare("SELECT * FROM books ORDER BY title");
-                    $stmt->execute();
-
-                    $books = [];
-                    while ($row = $stmt->fetch()) {
-                        $books[] = new Book($row);
-                    }
-
-                    return $books;
-                }
-
-                // Find game by ID
-                public static function findById($id)
-                {
-                    $db = DB::getInstance()->getConnection();
-                    $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
-                    $stmt->execute(['id' => $id]);
-
-                    $row = $stmt->fetch();
-                    if ($row) {
-                        return new Book($row);
-                    }
-
-                    return null;
-                }
-
-                // Find games by genre
-                public static function findByPublisher($publisher_id)
-                {
-                    $db = DB::getInstance()->getConnection();
-                    $stmt = $db->prepare("SELECT * FROM books WHERE publisher_id = :publisher_id ORDER BY title");
-                    $stmt->execute(['publisher_id' => $publisher_id]);
-
-                    $books = [];
-                    while ($row = $stmt->fetch()) {
-                        $books[] = new Book($row);
-                    }
-
-                    return $books;
-                }
-
-                public function toArray()
-                {
-                    return [
-                        'id' => $this->id,
-                        'title' => $this->title,
-                        'author' => $this->author,
-                        'publisher_id' => $this->publisher_id,
-                        'year' => $this->year,
-                        'isbn' => $this->isbn,
-                        'description' => $this->description,
-                        'cover_filename' => $this->cover_filename
-                    ];
-                }
-            }
-            ?>
-        </div>
-
         <h3>Test findAll():</h3>
         <div class="output">
             <?php
@@ -146,7 +54,6 @@ require_once __DIR__ . '/lib/config.php';
                 echo "<p class='warning'>findById() not implemented or book not found</p>";
             } else {
                 echo "<p class='success'>Found book: " . htmlspecialchars($book->title ?? 'No title') . "</p>";
-                echo "<p>Author: " . htmlspecialchars($book->author ?? 'No author') . "</p>";
             }
             ?>
         </div>

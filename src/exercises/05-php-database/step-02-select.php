@@ -57,6 +57,7 @@ catch (PDOException $e) {
                 $stmt = $db->query("SELECT * FROM books ORDER BY title");
                 $books = $stmt->fetchAll();
 
+                echo "<p class='success'>Total books found: " . count($books) . " </p>";
                 ?>
                 <table class="data-table">
                     <thead>
@@ -80,7 +81,7 @@ catch (PDOException $e) {
                 </table>
             <?php
             } catch (PDOException  $e) {
-                echo "Connection failes: " . $e->getMessage();
+                echo "Connection failed: " . $e->getMessage();
             }
             ?>
         </div>

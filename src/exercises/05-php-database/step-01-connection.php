@@ -45,7 +45,7 @@ require_once __DIR__ . '/lib/config.php';
                 $db = new PDO(DB_DSN, DB_USER, DB_PASS, DB_OPTIONS);
                 echo "Connected Sucessfully!";
             } catch (PDOException  $e) {
-                echo "Connection failes: " . $e->getMessage();
+                echo "Connection failed: " . $e->getMessage();
             }
             
             ?>

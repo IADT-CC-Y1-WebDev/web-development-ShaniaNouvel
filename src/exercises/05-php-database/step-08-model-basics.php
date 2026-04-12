@@ -33,67 +33,23 @@ require_once __DIR__ . '/lib/config.php';
         <h3>Test Your Implementation:</h3>
         <div class="output">
             <?php
-            class BookBasic
-            {
-                public $id;
-                public $title;
-                public $author;
-                public $publisher_id;
-                public $year;
-                public $isbn;
-                public $description;
-                public $cover_filename;
-
-                private $db;
-
-                public function __construct($data = [])
-                {
-                    $this->db = DB::getInstance()->getConnection();
-
-                    if (!empty($data)) {
-                        $this->id = $data['id'] ?? null;
-                        $this->title = $data['title'] ?? null;
-                        $this->author = $data['author'] ?? null;
-                        $this->publisher_id = $data['publisher_id'] ?? null;
-                        $this->year = $data['year'] ?? null;
-                        $this->isbn = $data['isbn'] ?? null;
-                        $this->description = $data['description'] ?? null;
-                        $this->cover_filename = $data['cover_filename'] ?? null;
-                    }
-                }
-
-                public function toArray()
-                {
-                    return [
-                        'id' => $this->id,
-                        'title' => $this->title,
-                        'author' => $this->author,
-                        'publisher_id' => $this->publisher_id,
-                        'year' => $this->year,
-                        'isbn' => $this->isbn,
-                        'description' => $this->description,
-                        'cover_filename' => $this->cover_filename
-                    ];
-                }
-            }
-
             // Test 1: Create empty Book
-            $book = new BookBasic();
+            $book = new Book();
             echo "<h4>Test 1: Empty Book</h4>";
             echo "<p>Title: " . ($book->title ?? 'null') . "</p>";
 
             // Test 2: Create Book from data
             $data = [
                 'id' => 99,
-                'title' => 'Test Book',
-                'author' => 'Test Author',
+                'title' => 'Harry Potter and the Philosophers Stone',
+                'author' => 'J.K. Rowling',
                 'publisher_id' => 1,
                 'year' => 2024,
                 'isbn' => '123-456-789',
-                'description' => 'A test book',
+                'description' => 'A magical story',
                 'cover_filename' => 'test.jpg'
             ];
-            $book2 = new BookBasic($data);
+            $book2 = new Book($data);
             echo "<h4>Test 2: Book from Data</h4>";
             echo "<p>Title: " . htmlspecialchars($book2->title ?? 'NOT IMPLEMENTED') . "</p>";
             echo "<p>Author: " . htmlspecialchars($book2->author ?? 'NOT IMPLEMENTED') . "</p>";
@@ -112,7 +68,7 @@ require_once __DIR__ . '/lib/config.php';
             $stmt = $db->query("SELECT * FROM books WHERE id = 1");
             $row = $stmt->fetch();
 
-            $book2 = new BookBasic($data);
+            $book2 = new Book($data);
 
             echo $book->title; 
             ?>
