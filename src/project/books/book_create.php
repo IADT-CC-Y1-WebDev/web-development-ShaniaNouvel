@@ -91,8 +91,8 @@ catch (PDOException $e) {
                                     <label for="format_<?= h($format->id) ?>"><?= h($format->name) ?></label>
                                 </div>
                             <?php } ?>
+                            <p id="format_ids_error"><?= error('format_ids[]')?></p>
                         </div>
-                        <span id="format_ids_error"><?= error('format_ids[]') ?></span>
                     </div>
                     <div class="input">
                         <label class="special" for="description">Description:</label>

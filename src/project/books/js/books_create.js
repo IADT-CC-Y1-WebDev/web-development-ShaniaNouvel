@@ -19,7 +19,7 @@ let publisherIdError = document.getElementById('publisher_id_error');
 let descriptionError = document.getElementById('description_error');
 let yearError = document.getElementById('year_error');
 let isbnError = document.getElementById('isbn_error');
-let formatIdsError = document.getElementsByName('format_ids_error');
+let formatIdsError = document.getElementById('format_ids_error');
 let coverError= document.getElementById('cover_error');
 
 let errors = {};

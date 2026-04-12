@@ -27,7 +27,7 @@ catch (PDOException $e) {
             </div>
             <?php if (!empty($books)) { ?>
                 <div class="width-12 filters">
-                    <form>
+                    <form id="filters">
                         <div>
                             <label for="title_filter">Title:</label>
                             <input type="text" id="title_filter" name="title_filter">
@@ -60,11 +60,16 @@ catch (PDOException $e) {
         </div>
         <div class="container">
             <?php if (empty($books)) { ?>
-                <p>No books found.</p>
+                <div class="width-12 ">
+                    <p class="error-summary width-12">No books found.</p>
+                </div>
             <?php } else { ?>
-                <div class="width-12 cards">
+                <div id="book_cards" class="width-12 cards">
                     <?php foreach ($books as $book) { ?>
-                        <div class="card">
+                        <div class="card"
+                            data-title="<?= htmlspecialchars($book->title) ?>"
+                            data-publisher="<?= htmlspecialchars($book->publisher_id) ?>"
+                            data-format="<?= htmlspecialchars($format->name) ?>">
                             <div class="top-content">
                                 <h2>Title: <?= h($book->title) ?></h2>
                                 <p>Author: <?= h($book->author) ?></p>
@@ -82,5 +87,6 @@ catch (PDOException $e) {
                 </div>
             <?php } ?>
         </div>
+        <script src="js/books_filter.js"></script>
     </body>
 </html>
