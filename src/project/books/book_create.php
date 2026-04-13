@@ -32,7 +32,7 @@ catch (PDOException $e) {
 
             </div>
             <div class="width-12">
-                <form action="book_store.php" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="book_store.php" id="book_form" method="POST" enctype="multipart/form-data" novalidate>
                     <div id="error_summary_top" class="error-summary" style="display:none" role="alert"></div>
                 
                     <div class="input">

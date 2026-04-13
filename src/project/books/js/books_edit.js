@@ -1,5 +1,3 @@
-// 09-2: Games-style form validation (formHandler pattern)
-
 let submitBtn = document.getElementById('submit_btn');
 let bookForm = document.getElementById('book_form');
 let errorSummaryTop = document.getElementById('error_summary_top');
@@ -11,7 +9,6 @@ let descriptionInput = document.getElementById('description');
 let yearInput = document.getElementById('year');
 let isbnInput = document.getElementById('isbn');
 let formatIdsInput = document.getElementsByName('format_ids[]');
-let coverInput = document.getElementById('cover');
 
 let titleError = document.getElementById('title_error');
 let authorError = document.getElementById('author_error');
@@ -20,11 +17,10 @@ let descriptionError = document.getElementById('description_error');
 let yearError = document.getElementById('year_error');
 let isbnError = document.getElementById('isbn_error');
 let formatIdsError = document.getElementById('format_ids_error');
-let coverError= document.getElementById('cover_error');
 
 let errors = {};
 
-submitBtn.addEventListener('click', onSubmitForm);
+submitBtn.addEventListener('submit', onSubmitForm);
 
 function addError(fieldName, message) {
     errors[fieldName] = message;
@@ -56,7 +52,6 @@ function showFieldErrors() {
     yearError.innerHTML = errors.year || '';
     isbnError.innerHTML = errors.isbn || '';
     formatIdsError.innerHTML = errors.format_ids || '';
-    coverError.innerHTML = errors.cover || '';
 }
 
 function isRequired(value) {
@@ -127,11 +122,6 @@ function onSubmitForm(evt) {
         addError('Description', `Description must be at least ${descMin} characters.`);
     } else if(!isMaxLength(descriptionInput.value, descMax)){
         addError('Description', `Description must be at most ${descMax} characters.`);
-    }
-
-    // image
-    if (!coverInput.files || coverInput.files.length === 0) {
-        addError('cover', 'Book cover is required.');
     }
 
     showFieldErrors();
