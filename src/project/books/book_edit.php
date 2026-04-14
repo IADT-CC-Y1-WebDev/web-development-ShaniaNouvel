@@ -56,7 +56,7 @@ catch (PDOException $e) {
                 <h1>Edit Book</h1>
             </div>
             <div class="width-12">
-                <form action="book_update.php" id="bookForm" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="book_update.php" id="book_form" method="POST" enctype="multipart/form-data" novalidate>
                     <div id="error_summary_top" class="error-summary" style="display:none" role="alert"></div>
                     <div class="input">
                         <input type="hidden" name="id" value="<?= h($book->id) ?>">
@@ -137,7 +137,7 @@ catch (PDOException $e) {
                     </div>
                     <div class="input">
                         <button id='submit_btn' class="button" type="submit">Update Book</button>
-                        <div class="button"><a href="index.php">Cancel</a></div>
+                        <button class="button"><a href="book_list.php">Cancel</a></div>
                     </div>
                 </form>
             </div>

@@ -71,18 +71,18 @@ function getFilters() {
     const titleEl = form.elements['title_filter'];
     const publisherEl = form.elements['publisher_filter'];
     const formatEl = form.elements['format_filter'];
-    // const sortEl = form.elements['sort_by'];
+    const sortEl = form.elements['sort_by'];
 
     let titleFilter = (titleEl.value || '').trim().toLowerCase();
     let publisherFilter = publisherEl.value || '';
     let formatFilter = formatEl.value || '';
-    // let sortBy = sortEl.value || 'title_asc';
+    let sortBy = sortEl.value || 'title_asc';
 
     return {
         "titleFilter" : titleFilter,
         "publisherFilter" : publisherFilter,
-        "formatFilter" : formatFilter
-        // "sortBy" : sortBy
+        "formatFilter" : formatFilter,
+        "sortBy" : sortBy
     };
 }
 

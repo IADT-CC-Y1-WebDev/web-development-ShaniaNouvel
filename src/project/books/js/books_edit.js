@@ -20,7 +20,7 @@ let formatIdsError = document.getElementById('format_ids_error');
 
 let errors = {};
 
-submitBtn.addEventListener('submit', onSubmitForm);
+submitBtn.addEventListener('click', onSubmitForm);
 
 function addError(fieldName, message) {
     errors[fieldName] = message;
