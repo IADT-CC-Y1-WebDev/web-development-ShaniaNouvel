@@ -22,7 +22,7 @@ catch (PDOException $e) {
         <div class="item filters" style="">
             <h1>Welcome to DLR Lexicon</h1>
             <p>DLR Lexicon, branded as dlr LexIcon, is a building in Dún Laoghaire, Ireland, housing the main public library and cultural centre of Dún Laoghaire–Rathdown County Council.</p>
-            <a href="book_list.php"><button>Library Dashboard</button></a>
+            <a href="book_list.php"><button class="buttonDark">Library Dashboard</button></a>
         </div>
     </div>
 </body>

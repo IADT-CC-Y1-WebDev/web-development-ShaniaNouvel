@@ -63,6 +63,16 @@ function isRequired(value) {
     return String(value).trim() !== '';
 }
 
+
+//fix
+// function isMinInteger(value, min) {
+//     (!Number.isNaN(value)) && value >= min
+// }
+
+// function isMaxInteger(value, max) {
+//     (!Number.isNaN(value)) && value >= max
+// }
+
 function isMinLength(value, min) {
     return String(value).trim().length >= min;
 }
@@ -76,8 +86,14 @@ function onSubmitForm(evt) {
 
     errors = {};
     
-    let titleMin = titleInput.dataset.minlength || 3;
+    let titleMin = titleInput.dataset.minlength || 10;
     let titleMax = titleInput.dataset.maxlength || 255;
+    let authorMin = authorInput.dataset.minlength || 10;
+    let authorMax = authorInput.dataset.maxlength || 255;
+    let yearMin = yearInput.dataset.mininteger|| 3;
+    let yearMax = yearInput.dataset.maxinteger || 4;
+    let isbnMin = yearInput.dataset.mininteger|| 13;
+    let isbnMax = yearInput.dataset.maxinteger || 13;
     let descMin = 10;
     let descMax = 1000;
 
@@ -90,24 +106,39 @@ function onSubmitForm(evt) {
         addError('title', 'Title must be at most ' + titleMax + ' charcaters.');
     }
 
-    //release date
+    //author
     if(!isRequired(authorInput.value)){
-        addError('author_date', 'Author is required');
+        addError('author', 'Author is required');
+    } else if(!isMinLength(authorInput.value, authorMin)){
+        addError('author', 'Author must be at least ' + authorMin + ' characters.');
+    } else if(!isMaxLength(authorInput.value, authorMax)){
+        addError('author', 'Author must be at most ' + authorMax + ' charcaters.');
     }
 
+    //publisher
     if(!isRequired(publisherIdInput.value)){
         addError('publisher_id', 'Publisher is required');
     }
 
+    //year
     if(!isRequired(yearInput.value)){
         addError('year', 'Year is required');
+    } else if(!isMinInteger(yearInput.value, authorMin)){
+        addError('year', 'Year must be at least ' + yearMin + ' integers.');
+    } else if(!isMaxInteger(yearInput.value, authorMax)){
+        addError('year', 'Year must be at most ' + yearMax + ' integers.');
     }
 
+    //isbn
     if(!isRequired(isbnInput.value)){
         addError('isbn', 'Isbn is required');
+    } else if(!isMinInteger(isbnInput.value, isbnMin)){
+        addError('isbn', 'Isbn must be at least ' + isbnMin + ' integers.');
+    } else if(!isMaxInteger(isbnInput.value, isbnMax)){
+        addError('isbn', 'Isbn must be at most ' + isbnMax + ' integers.');
     }
 
-    //platform 
+    //format 
     let formatSelected = false;
     for (let i = 0; i < formatIdsInput.length; i++) {
         if (formatIdsInput[i].checked) {
@@ -124,9 +155,9 @@ function onSubmitForm(evt) {
     if(!isRequired(descriptionInput.value)){
         addError('description', 'Description is required');
     } else if(!isMinLength(descriptionInput.value, descMin)){
-        addError('Description', `Description must be at least ${descMin} characters.`);
+        addError('description', `Description must be at least ${descMin} characters.`);
     } else if(!isMaxLength(descriptionInput.value, descMax)){
-        addError('Description', `Description must be at most ${descMax} characters.`);
+        addError('description', `Description must be at most ${descMax} characters.`);
     }
 
     // image

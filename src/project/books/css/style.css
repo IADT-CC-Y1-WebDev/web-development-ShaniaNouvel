@@ -106,7 +106,8 @@ h1,h2,h3 {
     color: #2f0248;
 }
 
-.filters button, .buttonLight {
+.buttonDark {
+	font-family: "Montserrat", sans-serif;
 	font-size: 13px;
 	background-color: #2f0248;
 	padding: 5px 10px;
@@ -126,13 +127,19 @@ h1,h2,h3 {
 	justify-content: space-between;
 }
 
-.button {
+.buttonLight {
+	font-family: "Montserrat", sans-serif;
 	font-size: 13px;
-	background-color: #b06aff;
+	background-color: #a66eff;
 	padding: 5px 10px;
 	color: #ececec;
 	border: 1px solid #2f0248;
 	border-radius: 5px;
+}
+
+button:hover {
+	background-color: #f3c8ff;
+	color: #2f0248;
 }
 
 .hCard {
@@ -144,7 +151,6 @@ h1,h2,h3 {
 	display: flex;
 	gap: 20px;
 	flex-direction: row;
-	justify-content: space-between;
 }
 
 .hCard h2 {
@@ -152,14 +158,15 @@ h1,h2,h3 {
 	line-height: 45px;
 	font-family: serif;
 	margin-bottom: 12px;
-	font-weight: 300;
+	font-weight: 600;
 	color: #2f0248;
 }
 
 .hCard p {
-	margin-bottom: 10px;
-	font-family: serif;
-	color: #2f0248;
+	font-size: 14px;
+    color: #2f0248;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 8px;
 }
 
 .hCard .actions {
@@ -265,7 +272,7 @@ h1,h2,h3,p .textCreate {
     padding: 32px 16px;
     margin: 32px;
     border: 1px solid rgba(0, 0, 0, 0.38);
-    width: 600px;
+    width: 800px;
 }
 
 .sCreate label {

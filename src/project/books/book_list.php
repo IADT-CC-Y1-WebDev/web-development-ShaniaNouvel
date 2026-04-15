@@ -22,15 +22,15 @@ catch (PDOException $e) {
             <div class="width-12 header">
                 <?php require 'php/inc/flash_message.php'; ?>
                 <h1>DLR Lexicon</h2>
-                <div class="button">
-                    <a href="book_create.php">Add New Book</a>
+                <div>
+                    <a href="book_create.php"><button class="buttonDark">Add New Book</button></a>
                 </div>
             </div>
             <?php if (!empty($books)) { ?>
                 <div class="width-12 filters">
                     <form id="filters">
                         <div>
-                            <a href="index.php" ><button type="button" style="width: 100px">Home</button></a>
+                            <a href="index.php" ><button type="button" class="buttonDark" style="width: 100px">Home</button></a>
                         </div>
                         <div class="input">
                             <label for="title_filter">Title:</label>
@@ -65,8 +65,8 @@ catch (PDOException $e) {
                             </div>
                         </div>
                         <div>
-                            <button type="buttonLight" id="apply_filters">Apply Filters</button>
-                            <button type="button" id="clear_filters">Clear Filters</button>
+                            <button type="button" class="buttonLight" id="apply_filters">Apply Filters</button>
+                            <button type="button" class="buttonDark" id="clear_filters">Clear Filters</button>
                         </div>
                     </form>
                 </div>

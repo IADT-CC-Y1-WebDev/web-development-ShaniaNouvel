@@ -20,7 +20,7 @@ catch (PDOException $e) {
 <html lang="en">
     <head>
         <?php include 'php/inc/head_content.php'; ?>
-        <title>View book</title>
+        <title>New Book</title>
     </head>
     <body>
         <div class="aCard">
@@ -30,7 +30,6 @@ catch (PDOException $e) {
                 </div>
                 <div class="width-12 headerCreate">
                     <h1>Add New Book</h1>
-
                 </div>
                 <div class="width-12">
                     <form action="book_store.php" id="book_form" method="POST" enctype="multipart/form-data" novalidate>
@@ -110,8 +109,8 @@ catch (PDOException $e) {
                             </div>
                         </div>
                         <div class="input">
-                            <button id='submit_btn' class="button" type="submit">Store Book</button>
-                            <button class="buttonLight"><a href="book_list.php">Cancel</a></div>
+                            <button id='submit_btn' class="buttonLight" type="submit">Store Book</button>
+                            <button class="buttonDark"><a href="book_list.php">Cancel</a></div>
                         </div>
                     </form>
                 </div>

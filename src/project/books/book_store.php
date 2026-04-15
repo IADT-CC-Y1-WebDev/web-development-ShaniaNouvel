@@ -31,8 +31,8 @@ try {
     // Define validation rules
     $year = date("Y");
     $rules = [
-        'title' => 'required|notempty|min:1|max:255',
-        'author' => 'required|notempty|min:1|max:255',
+        'title' => 'required|notempty|min:10|max:255',
+        'author' => 'required|notempty|min:10|max:255',
         'publisher_id' => 'required|notempty|integer',
         'year' => 'required|notempty|integer|minvalue:1900|maxvalue:' . $year,
         'isbn' => 'required|notempty|min:13|max:13',

@@ -47,17 +47,17 @@ catch (PDOException $e) {
                         <div class="actions">
                             <a href="book_edit.php?id=<?= h($book->id) ?>">Edit</a> /
                             <a href="book_delete.php?id=<?= h($book->id) ?>">Delete</a> /
-                            <a href="index.php">Back</a>
+                            <a href="book_list.php">Back</a>
                         </div>
                     </div>
 
                     <div class="bottom-content">
                         <h2><?= htmlspecialchars($book->title) ?></h2>
-                        <p>Author: <?= htmlspecialchars($book->author) ?></p>
-                        <p>Year: <?= htmlspecialchars($book->year) ?></p>
-                        <p>Publisher: <?= htmlspecialchars($publishers->name) ?></p>
-                        <p>Description:<br /><?= nl2br(htmlspecialchars($book->description)) ?></p>
-                        <p>Formats: <?= implode(', ', $formatNames) ?></p>
+                        <p><strong>Author: </strong><?= htmlspecialchars($book->author) ?></p>
+                        <p><strong>Year: </strong><?= htmlspecialchars($book->year) ?></p>
+                        <p><strong>Publisher: </strong><?= htmlspecialchars($publishers->name) ?></p>
+                        <p><strong>Description: </strong><br /><?= nl2br(htmlspecialchars($book->description)) ?></p>
+                        <p><strong>Formats: </strong><?= implode(', ', $formatNames) ?></p>
                     </div>
                 </div>
             </div>
