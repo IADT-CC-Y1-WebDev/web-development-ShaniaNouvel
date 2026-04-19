@@ -22,8 +22,16 @@ catch (PDOException $e) {
             <div class="width-12 header">
                 <?php require 'php/inc/flash_message.php'; ?>
                 <h1>DLR Lexicon</h2>
-                <div>
-                    <a href="book_create.php"><button class="buttonDark">Add New Book</button></a>
+                <div style="display: flex">
+                    <div>
+                        <a href="book_create.php"><button class="buttonDark">Add New Book</button></a>
+                    </div>
+                    <div>
+                        <a href="book_create.php"><button class="buttonDark">Add New Publisher</button></a>
+                    </div>
+                    <div>
+                        <a href="book_create.php"><button class="buttonDark">Add New Format</button></a>
+                    </div>
                 </div>
             </div>
             <?php if (!empty($books)) { ?>
@@ -83,7 +91,7 @@ catch (PDOException $e) {
                         <div class="card"
                             data-title="<?= htmlspecialchars($book->title) ?>"
                             data-publisher="<?= htmlspecialchars($book->publisher_id) ?>"
-                            data-format="<?= htmlspecialchars($format->name) ?>"
+                            data-format="<?= htmlspecialchars($book-> format_ids) ?>"
                             data-year="<?= $book->year ?>">
                             <div class="top-content">
                                 <h2><?= h($book->title) ?></h2>

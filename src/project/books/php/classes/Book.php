@@ -9,6 +9,7 @@ class Book
     public $publisher_id;
     public $year;
     public $isbn;
+    public $format_ids;
     public $description;
     public $cover_filename;
 
@@ -26,6 +27,7 @@ class Book
             $this->publisher_id = $data['publisher_id'] ?? null;
             $this->year = $data['year'] ?? null;
             $this->isbn = $data['isbn'] ?? null;
+            $this->format_ids = $data['format_ids'] ?? null;
             $this->description = $data['description'] ?? null;
             $this->cover_filename = $data['cover_filename'] ?? null;
         }
@@ -34,7 +36,17 @@ class Book
     public static function findAll()
     {
         $db = DB::getInstance()->getConnection();
-        $stmt = $db->prepare("SELECT * FROM books ORDER BY title");
+    
+        $stmt = $db->prepare("
+            SELECT 
+                b.*,
+                GROUP_CONCAT(bf.format_id) AS format_ids
+            FROM books b
+            LEFT JOIN book_format bf ON b.id = bf.book_id
+            GROUP BY b.id
+            ORDER BY b.title
+        ");
+
         $stmt->execute();
 
         $books = [];
