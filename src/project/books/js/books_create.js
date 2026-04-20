@@ -86,14 +86,15 @@ function onSubmitForm(evt) {
 
     errors = {};
     
-    let titleMin = titleInput.dataset.minlength || 10;
-    let titleMax = titleInput.dataset.maxlength || 255;
-    let authorMin = authorInput.dataset.minlength || 10;
-    let authorMax = authorInput.dataset.maxlength || 255;
-    let yearMin = yearInput.dataset.mininteger|| 3;
-    let yearMax = yearInput.dataset.maxinteger || 4;
-    let isbnMin = yearInput.dataset.mininteger|| 13;
-    let isbnMax = yearInput.dataset.maxinteger || 13;
+    let titleMin = Number(titleInput.dataset.minlength || 10);
+    let titleMax = Number(titleInput.dataset.maxlength || 255);
+    let authorMin = Number(authorInput.dataset.minlength || 10);
+    let authorMax = Number(authorInput.dataset.maxlength || 255);
+    let yearMin = Number(yearInput.dataset.minlength|| 3);
+    let yearMax = Number(yearInput.dataset.maxlength || 4);
+    let year = Number(yearInput.value);
+    let isbnMin = Number(yearInput.dataset.minlength|| 13);
+    let isbnMax = Number(yearInput.dataset.maxlength || 13);
     let descMin = 10;
     let descMax = 1000;
 
@@ -123,18 +124,20 @@ function onSubmitForm(evt) {
     //year
     if(!isRequired(yearInput.value)){
         addError('year', 'Year is required');
-    } else if(!isMinInteger(yearInput.value, authorMin)){
-        addError('year', 'Year must be at least ' + yearMin + ' integers.');
-    } else if(!isMaxInteger(yearInput.value, authorMax)){
-        addError('year', 'Year must be at most ' + yearMax + ' integers.');
+    } else if (!Number.isInteger(year)) {
+        addError('year', 'Year must be a whole number');
+    } else if (year < yearMin) {
+        addError('year', 'Year must be at least ' + yearMin);
+    } else if (year > yearMax) {
+        addError('year', 'Year must be at most ' + yearMax);
     }
 
     //isbn
     if(!isRequired(isbnInput.value)){
         addError('isbn', 'Isbn is required');
-    } else if(!isMinInteger(isbnInput.value, isbnMin)){
+    } else if(!isMinLength(isbnInput.value, isbnMin)){
         addError('isbn', 'Isbn must be at least ' + isbnMin + ' integers.');
-    } else if(!isMaxInteger(isbnInput.value, isbnMax)){
+    } else if(!isMaxLength(isbnInput.value, isbnMax)){
         addError('isbn', 'Isbn must be at most ' + isbnMax + ' integers.');
     }
 
