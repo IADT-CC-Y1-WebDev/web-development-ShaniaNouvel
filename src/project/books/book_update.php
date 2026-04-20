@@ -142,6 +142,6 @@ catch (Exception $e) {
         redirect('book_edit.php?id=' . $data['id']);
     }
     else {
-        redirect('index.php');
+        redirect('book_list.php');
     }
 }

@@ -22,3 +22,14 @@ function openDash(evt, dash) {
 function addNew(show) {
     document.getElementById(show).classList.toggle("hideDiv");
 }
+
+function addButton(button) {
+    let card = button.closest('.card')
+    let togglebtn = card.querySelector('.hideDiv');
+
+    if (togglebtn.style.display === "none" || togglebtn.style.display === "") {
+        togglebtn.style.display = "flex";
+    } else {
+        togglebtn.style.display = "none";
+    }
+}

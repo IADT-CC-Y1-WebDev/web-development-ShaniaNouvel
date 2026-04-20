@@ -63,16 +63,6 @@ function isRequired(value) {
     return String(value).trim() !== '';
 }
 
-
-//fix
-// function isMinInteger(value, min) {
-//     (!Number.isNaN(value)) && value >= min
-// }
-
-// function isMaxInteger(value, max) {
-//     (!Number.isNaN(value)) && value >= max
-// }
-
 function isMinLength(value, min) {
     return String(value).trim().length >= min;
 }
@@ -86,17 +76,17 @@ function onSubmitForm(evt) {
 
     errors = {};
     
-    let titleMin = Number(titleInput.dataset.minlength || 10);
-    let titleMax = Number(titleInput.dataset.maxlength || 255);
-    let authorMin = Number(authorInput.dataset.minlength || 10);
-    let authorMax = Number(authorInput.dataset.maxlength || 255);
-    let yearMin = Number(yearInput.dataset.minlength|| 3);
-    let yearMax = Number(yearInput.dataset.maxlength || 4);
-    let year = Number(yearInput.value);
-    let isbnMin = Number(yearInput.dataset.minlength|| 13);
-    let isbnMax = Number(yearInput.dataset.maxlength || 13);
-    let descMin = 10;
-    let descMax = 1000;
+    const titleMin = Number(titleInput.dataset.minlength || 10);
+    const titleMax = Number(titleInput.dataset.maxlength || 255);
+    const authorMin = Number(authorInput.dataset.minlength || 10);
+    const authorMax = Number(authorInput.dataset.maxlength || 255);
+    const isbnMin = Number(yearInput.dataset.minlength|| 13);
+    const isbnMax = Number(yearInput.dataset.maxlength || 13);
+    const descMin = 10;
+    const descMax = 1000;
+
+    const currentYear = new Date().getFullYear();
+    const yearValue = Number(yearInput.value);
 
     //title
     if(!isRequired(titleInput.value)){
@@ -124,12 +114,12 @@ function onSubmitForm(evt) {
     //year
     if(!isRequired(yearInput.value)){
         addError('year', 'Year is required');
-    } else if (!Number.isInteger(year)) {
+    } else if (isNaN(yearValue)) {
         addError('year', 'Year must be a whole number');
-    } else if (year < yearMin) {
-        addError('year', 'Year must be at least ' + yearMin);
-    } else if (year > yearMax) {
-        addError('year', 'Year must be at most ' + yearMax);
+    } else if (yearValue < 1900) {
+        addError('year', 'Year must be greater than or equal to 1900');
+    } else if (yearValue > currentYear) {
+        addError('year', 'Year must be less than or equal to ' + currentYear);
     }
 
     //isbn

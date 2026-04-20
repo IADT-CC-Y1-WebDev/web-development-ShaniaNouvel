@@ -12,19 +12,22 @@ try {
     // Initialize errors array
     $errors = [];
     
-    // Check if request is GET
-    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    // Check if request is POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception('Invalid request method.');
     }
 
     // Get form data
     $data = [
-        'id' => $_GET['id'] ?? null
+        'id' => $_POST['id'] ?? null,
+        'publisher_name' => $_POST['publisher_name'] ?? null,
+
     ];
 
     // Define validation rules
     $rules = [
-        'id' => 'required|integer'
+        'id' => 'required|notempty|min:1|max:255',
+        'publisher_name' => 'required|notempty|min:10|max:255',
     ];
 
     // Validate all data (including file)
@@ -39,19 +42,14 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // Find existing game
-    $book = Book::findById($data['id']);
-    if (!$book) {
-        throw new Exception('Book not found.');
+    // Verify publisher exists
+    $publishers = Publisher::findById($data['id']);
+    if (!$publishers) {
+        throw new Exception('Selected publisher does not exist.');
     }
-
-    // Delete the associated image file if it exists
-    if ($book->coverfilename) {
-        $uploader = new ImageUpload();
-        $uploader->deleteImage($book->cover_filename);
-    }
-    // Delete the game
-    $book->delete();
+    
+    $publishers->name = $data['publisher_name'];
+    $publishers->save();
 
     // Clear any old form data
     clearFormData();
@@ -59,7 +57,7 @@ try {
     clearFormErrors();
 
     // Set success flash message
-    setFlashMessage('success', 'Book deleted successfully.');
+    setFlashMessage('success', 'Publisher updated successfully.');
 
     // Redirect to game details page
     redirect('book_list.php');
@@ -72,9 +70,9 @@ catch (Exception $e) {
     setFormData($data);
     setFormErrors($errors);
 
-    // Redirect back to view page if there is an ID; otherwise, go to index page
+    // Redirect back to edit page if there is an ID; otherwise, go to index page
     if (isset($data['id']) && $data['id']) {
-        redirect('book_view.php?id=' . $data['id']);
+        redirect('book_edit.php?id=' . $data['id']);
     }
     else {
         redirect('book_list.php');

@@ -40,18 +40,13 @@ try {
     }
 
     // Find existing game
-    $book = Book::findById($data['id']);
-    if (!$book) {
-        throw new Exception('Book not found.');
+    $publishers = Publisher::findById($data['id']);
+    if (!$publishers) {
+        throw new Exception('Selected publisher does not exist.');
     }
 
-    // Delete the associated image file if it exists
-    if ($book->coverfilename) {
-        $uploader = new ImageUpload();
-        $uploader->deleteImage($book->cover_filename);
-    }
     // Delete the game
-    $book->delete();
+    $publishers->delete();
 
     // Clear any old form data
     clearFormData();
@@ -59,7 +54,7 @@ try {
     clearFormErrors();
 
     // Set success flash message
-    setFlashMessage('success', 'Book deleted successfully.');
+    setFlashMessage('success', 'Publisher deleted successfully.');
 
     // Redirect to game details page
     redirect('book_list.php');
@@ -74,7 +69,7 @@ catch (Exception $e) {
 
     // Redirect back to view page if there is an ID; otherwise, go to index page
     if (isset($data['id']) && $data['id']) {
-        redirect('book_view.php?id=' . $data['id']);
+        redirect('book_list.php');
     }
     else {
         redirect('book_list.php');
