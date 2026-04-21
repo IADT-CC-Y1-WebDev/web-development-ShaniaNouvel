@@ -4,42 +4,49 @@ require_once 'php/lib/session.php';
 require_once 'php/lib/forms.php';
 require_once 'php/lib/utils.php';
 
-
 startSession();
 
 try {
+    // Initialize form data array
     $data = [];
+    // Initialize errors array
     $errors = [];
-
-    // Check if request is POST
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    
+    // Check if request is GET
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         throw new Exception('Invalid request method.');
     }
 
     // Get form data
     $data = [
-        'format_name' => $_POST['format_name'] ?? null,
+        'id' => $_GET['id'] ?? null
     ];
 
     // Define validation rules
     $rules = [
-        'format_name' => 'required|notempty|min:5|max:255'
+        'id' => 'required|integer'
     ];
 
     // Validate all data (including file)
     $validator = new Validator($data, $rules);
 
     if ($validator->fails()) {
+        // Get first error for each field
         foreach ($validator->errors() as $field => $fieldErrors) {
             $errors[$field] = $fieldErrors[0];
         }
+
         throw new Exception('Validation failed.');
     }
 
-    // Create new book instance
-    $formats = new Format();
-    $formats->name = $data['format_name'];
-    $formats->save();
+    // Find existing game
+    $formats = Format::findById($data['id']);
+    if (!$formats) {
+        throw new Exception('Selected formats does not exist.');
+    }
+
+    // Delete the game
+    $formats->delete();
 
     // Clear any old form data
     clearFormData();
@@ -47,7 +54,7 @@ try {
     clearFormErrors();
 
     // Set success flash message
-    setFlashMessage('success', 'Book stored successfully.');
+    setFlashMessage('success', 'Formats deleted successfully.');
 
     // Redirect to game details page
     redirect('book_list.php');
@@ -60,5 +67,11 @@ catch (Exception $e) {
     setFormData($data);
     setFormErrors($errors);
 
-    redirect('book_list.php');
+    // Redirect back to view page if there is an ID; otherwise, go to index page
+    if (isset($data['id']) && $data['id']) {
+        redirect('book_list.php');
+    }
+    else {
+        redirect('book_list.php');
+    }
 }

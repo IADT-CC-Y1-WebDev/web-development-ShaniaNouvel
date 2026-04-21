@@ -1,11 +1,11 @@
-let applyBtn = document.getElementById('apply_filters');
-let clearBtn = document.getElementById('clear_filters');
+let applyBtn = document.getElementById('apply_publisher');
+let clearBtn = document.getElementById('clear_publisher');
 
-let cardsContainer = document.getElementById("book_cards");
+let cardsContainer = document.getElementById("publisher_cards");
 
-let cards = document.querySelectorAll('.card');
+let cards = document.querySelectorAll('.pubCard');
 
-let form = document.getElementById("filters");
+let form = document.getElementById("filters_publisher");
 
 applyBtn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -17,7 +17,7 @@ clearBtn.addEventListener('click', (event) => {
     clearFilters();
 });
 
-document.querySelector("form").addEventListener("submit", (event) => {
+form.addEventListener("submit", (event) => {
     event.preventDefault();
     applyFilters();
 });
@@ -41,53 +41,44 @@ function sortCards(cards, sortBy) {
     const list = cards.slice();
     
     list.sort((a, b) => {
-        let titleA = a.dataset.title.toLowerCase();
-        let titleB = b.dataset.title.toLowerCase();
+        let pubA = a.dataset.publisher.toLowerCase();
+        let pubB = b.dataset.publisher.toLowerCase();
         let yearA = Number(a.dataset.year);
         let yearB = Number(b.dataset.year);
 
         if (sortBy === "year_desc") return yearB - yearA;
         if (sortBy === "year_asc") return yearA - yearB;
 
-        return titleA.localeCompare(titleB);
+        return pubA.localeCompare(pubB);
     });
 
     return list;
 }
 
 function cardMatches(crd, fltrs) {
-    let title = crd.dataset.title.toLowerCase();
-    let publisher = crd.dataset.publisher;
-    let format = crd.dataset.format;
+    let publisher = crd.dataset.publisher.toLowerCase();
 
-    let matchTitle    = fltrs.titleFilter    === "" || title.includes(fltrs.titleFilter);
-    let matchPublisher    = fltrs.publisherFilter    === "" || publisher === fltrs.publisherFilter;
-    let matchFormat = fltrs.formatFilter === "" || format.includes(fltrs.formatFilter);
+    let matchPublisher    = fltrs.publisherFilter    === "" || publisher.includes(fltrs.publisherFilter);
 
-    return matchTitle && matchPublisher && matchFormat;
+    return matchPublisher;
 }
 
 function getFilters() {
-    const titleEl = form.elements['title_filter'];
     const publisherEl = form.elements['publisher_filter'];
-    const formatEl = form.elements['format_filter'];
-    const sortEl = form.elements['sort_by'];
+    // const sortEl = form.elements['sort_by'];
 
-    let titleFilter = (titleEl.value || '').trim().toLowerCase();
-    let publisherFilter = publisherEl.value || '';
-    let formatFilter = formatEl.value || '';
-    let sortBy = sortEl.value || 'title_asc';
+    let publisherFilter = (publisherEl.value || '').trim().toLowerCase();
+    // let sortBy = sortEl.value || 'title_asc';
 
     return {
-        "titleFilter" : titleFilter,
         "publisherFilter" : publisherFilter,
-        "formatFilter" : formatFilter,
-        "sortBy" : sortBy
+        // "sortBy" : sortBy
     };
 }
 
 function clearFilters() {
     form.reset();
+
     cards.forEach(card => {
         card.classList.remove('hidden');
     });
