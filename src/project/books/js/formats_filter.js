@@ -1,12 +1,12 @@
-function publisherFilters() {
-    let applyBtn = document.getElementById('apply_publisher');
-    let clearBtn = document.getElementById('clear_publisher');
+function formatFilters() {
+    let applyBtn = document.getElementById('apply_format');
+    let clearBtn = document.getElementById('clear_format');
 
-    let cardsContainer = document.getElementById("publisher_cards");
+    let cardsContainer = document.getElementById("format_cards");
 
-    let cards = document.querySelectorAll('.pubCard');
+    let cards = document.querySelectorAll('.formCard');
 
-    let form = document.getElementById("filters_publisher");
+    let form = document.getElementById("filters_format");
 
     applyBtn.addEventListener('click', (event) => {
         event.preventDefault();
@@ -42,37 +42,37 @@ function publisherFilters() {
         const list = cards.slice();
         
         list.sort((a, b) => {
-            let pubA = a.dataset.publisher.toLowerCase();
-            let pubB = b.dataset.publisher.toLowerCase();
+            let formA = a.dataset.format.toLowerCase();
+            let formB = b.dataset.format.toLowerCase();
             let idA = Number(a.dataset.id);
             let idB = Number(b.dataset.id);
 
-            if (sortBy === "id_desc") return idB - idA;
-            if (sortBy === "id_asc") return idA - idB;
+            if (sortBy === "formId_desc") return idB - idA;
+            if (sortBy === "formId_asc") return idA - idB;
 
-            return pubA.localeCompare(pubB);
+            return formA.localeCompare(formB);
         });
 
         return list;
     }
 
     function cardMatches(crd, fltrs) {
-        let publisher = crd.dataset.publisher.toLowerCase();
+        let format = crd.dataset.format.toLowerCase();
 
-        let matchPublisher    = fltrs.publisherFilter    === "" || publisher.includes(fltrs.publisherFilter);
+        let matchFormat   = fltrs.formatFilter    === "" || format.includes(fltrs.formatFilter);
 
-        return matchPublisher;
+        return matchFormat;
     }
 
     function getFilters() {
-        const publisherEl = form.elements['publisher_filter'];
+        const formatEl = form.elements['format_filter'];
         const sortEl = form.elements['sort_by'];
 
-        let publisherFilter = (publisherEl.value || '').trim().toLowerCase();
-        let sortBy = sortEl.value || 'pub_asc';
+        let formatFilter = (formatEl.value || '').trim().toLowerCase();
+        let sortBy = sortEl.value || 'form_asc';
 
         return {
-            "publisherFilter" : publisherFilter,
+            "formatFilter" : formatFilter,
             "sortBy" : sortBy
         };
     }
@@ -85,7 +85,7 @@ function publisherFilters() {
         });
 
         let cardsArray = Array.from(cards);
-        const sorted = sortCards(cardsArray, "pub_asc");
+        const sorted = sortCards(cardsArray, "form_asc");
 
         sorted.forEach(card => {
             cardsContainer.appendChild(card);
@@ -93,4 +93,4 @@ function publisherFilters() {
     }
 }
 
-publisherFilters();
+formatFilters();

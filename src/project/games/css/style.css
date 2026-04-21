@@ -102,8 +102,7 @@ body {
 
 .header {
 	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
+	justify-content: center;
 }
 
 .button {
