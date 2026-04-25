@@ -89,7 +89,7 @@ try {
         }
     }
     
-    // Update the game instance
+    // Update the book instance
     $book->id = $data['id'];
     $book->title = $data['title'];
     $book->author = $data['author'];

@@ -126,7 +126,7 @@ button {
     font-family: "Montserrat", serif;
 	font-size: 13px;
     padding: 10px;
-    width: 120px;
+    width: auto;
     cursor: pointer;
     border-radius: 3px;
     white-space: nowrap;

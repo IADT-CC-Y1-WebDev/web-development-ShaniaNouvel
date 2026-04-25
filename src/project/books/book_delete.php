@@ -39,7 +39,7 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // Find existing game
+    // Find existing book
     $book = Book::findById($data['id']);
     if (!$book) {
         throw new Exception('Book not found.');
@@ -50,7 +50,7 @@ try {
         $uploader = new ImageUpload();
         $uploader->deleteImage($book->cover_filename);
     }
-    // Delete the game
+    // Delete the book
     $book->delete();
 
     // Clear any old form data
@@ -61,7 +61,7 @@ try {
     // Set success flash message
     setFlashMessage('success', 'Book deleted successfully.');
 
-    // Redirect to game details page
+    // Redirect to book details page
     redirect('book_list.php');
 }
 catch (Exception $e) {

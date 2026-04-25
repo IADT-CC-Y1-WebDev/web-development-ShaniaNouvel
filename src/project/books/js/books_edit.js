@@ -71,10 +71,17 @@ function onSubmitForm(evt) {
 
     errors = {};
     
-    let titleMin = titleInput.dataset.minlength || 3;
-    let titleMax = titleInput.dataset.maxlength || 255;
-    let descMin = 10;
-    let descMax = 1000;
+    const titleMin = Number(titleInput.dataset.minlength || 10);
+    const titleMax = Number(titleInput.dataset.maxlength || 255);
+    const authorMin = Number(authorInput.dataset.minlength || 10);
+    const authorMax = Number(authorInput.dataset.maxlength || 255);
+    const isbnMin = Number(isbnInput.dataset.minlength|| 13);
+    const isbnMax = Number(isbnInput.dataset.maxlength || 13);
+    const descMin = 10;
+    const descMax = 1000;
+
+    const currentYear = new Date().getFullYear();
+    const yearValue = Number(yearInput.value);
 
     //title
     if(!isRequired(titleInput.value)){
@@ -85,24 +92,41 @@ function onSubmitForm(evt) {
         addError('title', 'Title must be at most ' + titleMax + ' charcaters.');
     }
 
-    //release date
+    //author
     if(!isRequired(authorInput.value)){
-        addError('author_date', 'Author is required');
+        addError('author', 'Author is required');
+    } else if(!isMinLength(authorInput.value, authorMin)){
+        addError('author', 'Author must be at least ' + authorMin + ' characters.');
+    } else if(!isMaxLength(authorInput.value, authorMax)){
+        addError('author', 'Author must be at most ' + authorMax + ' charcaters.');
     }
 
+    //publisher
     if(!isRequired(publisherIdInput.value)){
         addError('publisher_id', 'Publisher is required');
     }
 
+    //year
     if(!isRequired(yearInput.value)){
         addError('year', 'Year is required');
+    } else if (isNaN(yearValue)) {
+        addError('year', 'Year must be a whole number');
+    } else if (yearValue < 1900) {
+        addError('year', 'Year must be greater than or equal to 1900');
+    } else if (yearValue > currentYear) {
+        addError('year', 'Year must be less than or equal to ' + currentYear);
     }
 
+    //isbn
     if(!isRequired(isbnInput.value)){
         addError('isbn', 'Isbn is required');
+    } else if(!isMinLength(isbnInput.value, isbnMin)){
+        addError('isbn', 'Isbn must be at least ' + isbnMin + ' integers.');
+    } else if(!isMaxLength(isbnInput.value, isbnMax)){
+        addError('isbn', 'Isbn must be at most ' + isbnMax + ' integers.');
     }
 
-    //platform 
+    //format 
     let formatSelected = false;
     for (let i = 0; i < formatIdsInput.length; i++) {
         if (formatIdsInput[i].checked) {
@@ -119,9 +143,9 @@ function onSubmitForm(evt) {
     if(!isRequired(descriptionInput.value)){
         addError('description', 'Description is required');
     } else if(!isMinLength(descriptionInput.value, descMin)){
-        addError('Description', `Description must be at least ${descMin} characters.`);
+        addError('description', `Description must be at least ${descMin} characters.`);
     } else if(!isMaxLength(descriptionInput.value, descMax)){
-        addError('Description', `Description must be at most ${descMax} characters.`);
+        addError('description', `Description must be at most ${descMax} characters.`);
     }
 
     showFieldErrors();
@@ -129,7 +153,6 @@ function onSubmitForm(evt) {
 
     if(Object.keys(errors).length === 0){
         bookForm.submit();
-        // alert('Form data Valid');
     }
 }
 

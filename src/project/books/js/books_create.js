@@ -80,8 +80,8 @@ function onSubmitForm(evt) {
     const titleMax = Number(titleInput.dataset.maxlength || 255);
     const authorMin = Number(authorInput.dataset.minlength || 10);
     const authorMax = Number(authorInput.dataset.maxlength || 255);
-    const isbnMin = Number(yearInput.dataset.minlength|| 13);
-    const isbnMax = Number(yearInput.dataset.maxlength || 13);
+    const isbnMin = Number(isbnInput.dataset.minlength|| 13);
+    const isbnMax = Number(isbnInput.dataset.maxlength || 13);
     const descMin = 10;
     const descMax = 1000;
 

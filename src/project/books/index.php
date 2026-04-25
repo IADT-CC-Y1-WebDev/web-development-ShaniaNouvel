@@ -20,8 +20,8 @@ catch (PDOException $e) {
 <body>
     <div class="welcomeHolder">
         <div class="item filters" style="">
-            <h1>Welcome to DLR Lexicon</h1>
-            <p>DLR Lexicon, branded as dlr LexIcon, is a building in Dún Laoghaire, Ireland, housing the main public library and cultural centre of Dún Laoghaire–Rathdown County Council.</p>
+            <h1>Welcome to The Cosy Corner</h1>
+            <p>The Cosy Corner, is the hub that houses thousands of stories and books of all generes, available for all ages.</p>
             <a href="book_list.php"><button class="buttonDark">Library Dashboard</button></a>
         </div>
     </div>

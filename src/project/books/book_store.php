@@ -52,7 +52,6 @@ try {
     }
 
     // All validation passed - now process and save
-    // Verify genre exists
     $publishers = Publisher::findById($data['publisher_id']);
     if (!$publishers) {
         throw new Exception('Selected publisher does not exist.');
@@ -78,10 +77,10 @@ try {
 
     // Save to database
     $book->save();
-    // Create platform associations
+    // Create format associations
     if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
         foreach ($data['format_ids'] as $formatId) {
-            // Verify platform exists before creating relationship
+            // Verify format exists before creating relationship
             if (Format::findById($formatId)) {
                 BookFormat::create($book->id, $formatId);
             }

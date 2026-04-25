@@ -23,13 +23,13 @@ catch (PDOException $e) {
             <div class="width-12">
             <?php require 'php/inc/flash_message.php'; ?>
             </div>
-            <div class="width-12 header">
+            <div class="width-12" style="display: flex; justify-content: center;">
                 <h1>The Cosy Corner</h2>
             </div>
             <div class="width-12 filters navBar" style="flex-direction: row; gap: 5px">
-                    <a href="index.php"><button class="largeButton buttonLight"><i class="fa-regular fa-newspaper"></i>Home</button></a>
-                    <button class="tablinks largeButton buttonDark" onclick="openDash(event, 'booksD')"><i class="fa-solid fa-pen-fancy"></i>Books</button>
-                    <button class="tablinks largeButton buttonDark" onclick="openDash(event, 'publishersD')"><i class="fa-solid fa-location-dot"></i>Publishers</button>
+                    <a href="index.php"><button class="largeButton buttonLight"><i class="fa-solid fa-house"></i></i>Home</button></a>
+                    <button class="tablinks largeButton buttonDark" onclick="openDash(event, 'booksD')"><i class="fa-solid fa-book"></i></i>Books</button>
+                    <button class="tablinks largeButton buttonDark" onclick="openDash(event, 'publishersD')"><i class="fa-solid fa-print"></i></i>Publishers</button>
                     <button class="tablinks largeButton buttonDark" onclick="openDash(event, 'formatsD')"><i class="fa-solid fa-list"></i>Formats</button>
             </div>
         </div>
@@ -128,7 +128,7 @@ catch (PDOException $e) {
                                 </form>
                             </div>
                         <form id="filters_publisher">
-                            <button onclick="addNew('showPublisher')" type="button" class="buttonDark">New Publisher</button>
+                            <button onclick="addNew('showPublisher')" type="button" class="buttonDark">Add New Publisher</button>
                             <div class="input">
                                 <label for="publisher_filter">Title:</label>
                                 <input type="text" id="publisher_filter" name="publisher_filter">
@@ -209,7 +209,7 @@ catch (PDOException $e) {
                             </form>
                         </div>
                         <form id="filters_format">
-                            <button onclick="addNew('showFormat')" type="button" class="buttonDark">New Formats</button>
+                            <button onclick="addNew('showFormat')" type="button" class="buttonDark">Add New Formats</button>
                             <div class="input">
                                 <label for="format_filter">Title:</label>
                                 <input type="text" id="format_filter" name="format_filter">
