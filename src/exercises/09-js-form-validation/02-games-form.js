@@ -70,10 +70,9 @@ function onSubmitForm(evt) {
 
     errors = {};
     
-    let titleMin = titleInput.dataset.minlength || 3;
-    let titleMax = titleInput.dataset.maxlength || 255;
-    let descMin = 10;
-    let descMax = 255;
+    const titleMin = titleInput.dataset.minlength || 3;
+    const titleMax = titleInput.dataset.maxlength || 255;
+    const descMin = Number(descriptionInput.dataset.minlength || 10);
 
     //title
     if(!isRequired(titleInput.value)){
@@ -96,12 +95,14 @@ function onSubmitForm(evt) {
 
     //description
     if(!isRequired(descriptionInput.value)){
-        addError('description', 'Description is required');
-    } else if(!isMinLength(titleInput.value, descMin)){
-        addError('Description', `Description must be at least ${descMin} characters.`);
-    } else if(!isMaxLength(titleInput.value, descMax)){
-        addError('Description', `Description must be at least ${descMax} characters.`);
+        addError('description', 'Description is required.');
+    } else if (!isMinLength(descriptionInput.value, descMin)) {
+        addError(
+            'description',
+            'Description must be at least ' + descMin + ' characters.'
+        );
     }
+
 
     //platform 
     let platformSelected = false;
