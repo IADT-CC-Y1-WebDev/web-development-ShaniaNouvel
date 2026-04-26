@@ -104,7 +104,7 @@ try {
     // Save to database
     $book->save();
 
-    // Delete existing platform associations
+    // Delete existing format associations
     BookFormat::deleteByBook($book->id);
     // Create new format associations
     if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
@@ -121,7 +121,7 @@ try {
     // Set success flash message
     setFlashMessage('success', 'Book updated successfully.');
 
-    // Redirect to game details page
+    // Redirect to book details page
     redirect('book_view.php?id=' . $book->id);
 }
 catch (Exception $e) {

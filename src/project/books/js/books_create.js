@@ -1,5 +1,3 @@
-// 09-2: Games-style form validation (formHandler pattern)
-
 let submitBtn = document.getElementById('submit_btn');
 let bookForm = document.getElementById('book_form');
 let errorSummaryTop = document.getElementById('error_summary_top');
@@ -88,6 +86,8 @@ function onSubmitForm(evt) {
     const currentYear = new Date().getFullYear();
     const yearValue = Number(yearInput.value);
 
+    const isbnValue = Number(isbnInput.value);
+
     //title
     if(!isRequired(titleInput.value)){
         addError('title', 'Title is required');
@@ -125,6 +125,8 @@ function onSubmitForm(evt) {
     //isbn
     if(!isRequired(isbnInput.value)){
         addError('isbn', 'Isbn is required');
+    } else if (isNaN(isbnValue)) {
+        addError('isbn', 'Isbn must be a whole number');
     } else if(!isMinLength(isbnInput.value, isbnMin)){
         addError('isbn', 'Isbn must be at least ' + isbnMin + ' integers.');
     } else if(!isMaxLength(isbnInput.value, isbnMax)){

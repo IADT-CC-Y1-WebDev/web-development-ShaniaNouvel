@@ -47,9 +47,8 @@ try {
     clearFormErrors();
 
     // Set success flash message
-    setFlashMessage('success', 'Book stored successfully.');
+    setFlashMessage('success', 'Publisher stored successfully.');
 
-    // Redirect to game details page
     redirect('book_list.php');
 }
 catch (Exception $e) {

@@ -36,7 +36,6 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // Create new book instance
     $formats = new Format();
     $formats->name = $data['format_name'];
     $formats->save();
@@ -47,9 +46,8 @@ try {
     clearFormErrors();
 
     // Set success flash message
-    setFlashMessage('success', 'Book stored successfully.');
+    setFlashMessage('success', 'Format stored successfully.');
 
-    // Redirect to game details page
     redirect('book_list.php');
 }
 catch (Exception $e) {

@@ -83,6 +83,8 @@ function onSubmitForm(evt) {
     const currentYear = new Date().getFullYear();
     const yearValue = Number(yearInput.value);
 
+    const isbnValue = Number(isbnInput.value);
+
     //title
     if(!isRequired(titleInput.value)){
         addError('title', 'Title is required');
@@ -120,6 +122,8 @@ function onSubmitForm(evt) {
     //isbn
     if(!isRequired(isbnInput.value)){
         addError('isbn', 'Isbn is required');
+    } else if (isNaN(isbnValue)) {
+        addError('isbn', 'Isbn must be a whole number');
     } else if(!isMinLength(isbnInput.value, isbnMin)){
         addError('isbn', 'Isbn must be at least ' + isbnMin + ' integers.');
     } else if(!isMaxLength(isbnInput.value, isbnMax)){

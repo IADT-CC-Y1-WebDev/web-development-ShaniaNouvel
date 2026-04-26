@@ -75,7 +75,7 @@ try {
     $book->description = $data['description'];
     $book->cover_filename = $cover_filename;
 
-    // Save to database
+    //Save to database
     $book->save();
     // Create format associations
     if (!empty($data['format_ids']) && is_array($data['format_ids'])) {

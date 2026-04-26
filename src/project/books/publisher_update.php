@@ -71,10 +71,5 @@ catch (Exception $e) {
     setFormErrors($errors);
 
     // Redirect back to edit page if there is an ID; otherwise, go to index page
-    if (isset($data['id']) && $data['id']) {
-        redirect('book_list.php?id=' . $data['id']);
-    }
-    else {
-        redirect('book_list.php');
-    }
+    redirect('book_list.php');
 }

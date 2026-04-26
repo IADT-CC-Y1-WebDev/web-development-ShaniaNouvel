@@ -39,13 +39,13 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // Find existing game
+    // Find existing format
     $formats = Format::findById($data['id']);
     if (!$formats) {
         throw new Exception('Selected formats does not exist.');
     }
 
-    // Delete the game
+    // Delete the book
     $formats->delete();
 
     // Clear any old form data
@@ -56,7 +56,7 @@ try {
     // Set success flash message
     setFlashMessage('success', 'Formats deleted successfully.');
 
-    // Redirect to game details page
+    // Redirect to book details page
     redirect('book_list.php');
 }
 catch (Exception $e) {
